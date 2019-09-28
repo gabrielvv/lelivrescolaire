@@ -1,0 +1,37 @@
+  query getCandidatListWithDisplaySettings($organisationId: ID!) {
+    candidatList(organisationId: $organisationId) @client {
+      id
+      key: id
+      lastname
+      firstname
+      email
+      tags
+      initials
+      currentSession {
+        constraints {
+          constraintType
+          ratio
+        }
+        timeSpent
+        successRate
+        status
+        exercises {
+          name
+          description
+          timeSpent
+          timeLimit
+          successRate
+          status
+          constraints {
+              constraintType
+              ratio
+          }
+        }
+      }
+    }
+    candidatListDisplaySettings(organisationId: $organisationId) @client {
+      title
+      dataIndex
+      key
+    }
+  }

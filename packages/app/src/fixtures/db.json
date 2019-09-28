@@ -1,0 +1,297 @@
+{
+    "candidats": [{
+            "id": "1",
+            "firstname": "Luke",
+            "lastname": "Skywalker",
+            "email": "luke.skywalker@rebel.io",
+            "__typename": "Candidat",
+            "currentSession": {
+                "__typename": "Session",
+                "status": "TO_BE_DEFINED",
+                "timeSpent": 0,
+                "constraints": [{
+                    "constraintType": "MOBILE_DEVELOPMENT",
+                    "ratio": 100,
+                    "__typename": "Constraint"
+                }],
+                "exercises": []
+            }
+        },
+        {
+            "id": "2",
+            "firstname": "Dark",
+            "lastname": "Vador",
+            "email": "darth.vader@blackstar.io",
+            "__typename": "Candidat",
+            "currentSession": {
+                "__typename": "Session",
+                "status": "OPEN",
+                "constraints": [{
+                        "constraintType": "FULLSTACK",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "REACTJS",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "FUNCTIONAL_PROGRAMMING",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "NEO4J",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    }
+                ],
+                "exercises": [{
+                    "__typename": "Exercice",
+                    "status": "READY",
+                    "name": "Développer une interface en ReactJS",
+                    "description": "...",
+                    "constraints": [{
+                            "constraintType": "REACTJS",
+                            "ratio": 75,
+                            "__typename": "Constraint"
+                        },
+                        {
+                            "constraintType": "FUNCTIONAL_PROGRAMMING",
+                            "ratio": 25,
+                            "__typename": "Constraint"
+                        }
+                    ],
+                    "timeSpent": 0,
+                    "timeLimit": 240,
+                    "successRate": 0
+                }]
+            }
+        },
+        {
+            "id": "3",
+            "firstname": "John",
+            "lastname": "Brown",
+            "email": "johnnybrown@gmail.com",
+            "__typename": "Candidat",
+            "currentSession": {
+                "__typename": "Session",
+                "status": "IN_PROGRESS",
+                "constraints": [{
+                        "constraintType": "DEVOPS",
+                        "ratio": 50,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "GCP",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "KUBERNETES",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    }
+                ],
+                "exercises": [{
+                        "__typename": "Exercice",
+                        "status": "IN_PROGRESS",
+                        "name": "Déployer une stack de CI/CD",
+                        "description": "...",
+                        "constraints": [{
+                                "constraintType": "DEVOPS",
+                                "ratio": 50,
+                                "__typename": "Constraint"
+                            },
+                            {
+                                "constraintType": "KUBERNETES",
+                                "ratio": 50,
+                                "__typename": "Constraint"
+                            }
+                        ],
+                        "timeSpent": 230,
+                        "timeLimit": 240,
+                        "successRate": 0
+                    },
+                    {
+                        "__typename": "Exercice",
+                        "status": "READY",
+                        "name": "Kubernetes Basics",
+                        "description": "...",
+                        "constraints": [{
+                            "constraintType": "KUBERNETES",
+                            "ratio": 100,
+                            "__typename": "Constraint"
+
+                        }],
+                        "timeSpent": 0,
+                        "timeLimit": 240,
+                        "successRate": 0
+                    }
+                ]
+            }
+        },
+        {
+            "id": "4",
+            "firstname": "Jim",
+            "lastname": "Green",
+            "email": "jimmy@example.com",
+            "__typename": "Candidat",
+            "currentSession": {
+                "__typename": "Session",
+                "status": "FINISHED",
+                "constraints": [{
+                        "constraintType": "PYTHON",
+                        "ratio": 33.33,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "MACHINE_LEARNING",
+                        "ratio": 33.33,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "DATA_SCIENCE",
+                        "ratio": 33.33,
+                        "__typename": "Constraint"
+                    }
+                ],
+                "exercises": [{
+                        "__typename": "Exercice",
+                        "status": "FINISHED",
+                        "name": "Python Basics",
+                        "description": "...",
+                        "constraints": [{
+                            "constraintType": "PYTHON",
+                            "ratio": 100,
+                            "__typename": "Constraint"
+                        }],
+                        "timeSpent": 150,
+                        "timeLimit": 240,
+                        "successRate": 33
+                    },
+                    {
+                        "__typename": "Exercice",
+                        "status": "FINISHED",
+                        "name": "K-Mean",
+                        "description": "...",
+                        "constraints": [{
+                                "constraintType": "PYTHON",
+                                "ratio": 50,
+                                "__typename": "Constraint"
+                            },
+                            {
+                                "constraintType": "DATA_SCIENCE",
+                                "ratio": 50,
+                                "__typename": "Constraint"
+                            }
+                        ],
+                        "timeSpent": 1500,
+                        "timeLimit": 0,
+                        "successRate": 63
+                    }
+                ]
+            }
+        },
+        {
+            "id": "5",
+            "firstname": "Gabriel",
+            "lastname": "Vautrin",
+            "email": "gabriel.vautrin@gmail.com",
+            "__typename": "Candidat",
+            "currentSession": {
+                "__typename": "Session",
+                "status": "CLOSED",
+                "constraints": [{
+                        "constraintType": "FULLSTACK",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "REACTJS",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "FUNCTIONAL_PROGRAMMING",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "NEO4J",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    }
+                ],
+                "exercises": []
+            }
+        },
+        {
+            "id": "6",
+            "firstname": "Dan",
+            "lastname": "Abramov",
+            "email": "darth.vader@blackstar.io",
+            "__typename": "Candidat",
+            "currentSession": {
+                "__typename": "Session",
+                "status": "FINISHED",
+                "constraints": [{
+                        "constraintType": "FULLSTACK",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "REACTJS",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "FUNCTIONAL_PROGRAMMING",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    },
+                    {
+                        "constraintType": "NEO4J",
+                        "ratio": 25,
+                        "__typename": "Constraint"
+                    }
+                ],
+                "exercises": [{
+                    "__typename": "Exercice",
+                    "status": "FINISHED",
+                    "name": "Développer une interface en ReactJS",
+                    "description": "...",
+                    "constraints": [{
+                            "constraintType": "REACTJS",
+                            "ratio": 75,
+                            "__typename": "Constraint"
+                        },
+                        {
+                            "constraintType": "FUNCTIONAL_PROGRAMMING",
+                            "ratio": 25,
+                            "__typename": "Constraint"
+                        }
+                    ],
+                    "timeSpent": 10,
+                    "timeLimit": 240,
+                    "successRate": 100
+                }]
+            }
+        }
+    ],
+    "columns": [
+        {
+            "title": "Nom",
+            "dataIndex": "lastname",
+            "key": "lastname",
+            "__typename": "Column"
+        },
+        {
+            "title": "Prénom",
+            "dataIndex": "firstname",
+            "key": "firstname",
+            "__typename": "Column"
+        }
+    ]
+}

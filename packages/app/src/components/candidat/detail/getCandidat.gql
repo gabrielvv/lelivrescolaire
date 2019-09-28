@@ -1,0 +1,31 @@
+query getCandidat($id: ID!) {
+    candidat(id: $id) @client {
+      id
+      lastname
+      firstname
+      email
+      tags
+      initials
+      currentSession {
+        constraints {
+          constraintType
+          ratio
+        }
+        timeSpent
+        successRate
+        status
+        exercises {
+          name
+          description
+          timeSpent
+          timeLimit
+          successRate
+          status
+          constraints {
+              constraintType
+              ratio
+          }
+        }
+      }
+    }
+}

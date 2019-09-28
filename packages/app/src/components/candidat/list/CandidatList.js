@@ -1,27 +1,41 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Table } from "antd";
+import { Table, Spin, Empty, Button } from "antd";
+import { useQuery } from '@apollo/react-hooks';
+import { loader } from 'graphql.macro';
+import lodashIsEmpty from 'lodash/isEmpty';
 
-const CandidatList = ({ dataSource, columns }) => {
-  return <Table dataSource={dataSource} columns={columns} />;
-};
+import "./CandidatList.css";
+import { start, end } from './fixedColumns';
 
-CandidatList.propTypes = {
-  dataSource: PropTypes.arrayOf(
-    PropTypes.object({
-      key: PropTypes.string,
-      name: PropTypes.string,
-      age: PropTypes.number,
-      address: PropTypes.string
-    })
-  ),
-  columns: PropTypes.arrayOf(
-    PropTypes.object({
-      key: PropTypes.string,
-      title: PropTypes.string,
-      dataIndex: PropTypes.number
-    })
-  )
+const getCandidatListWithDisplaySettings = loader('./getCandidatListWithDisplaySettings.gql');
+
+const CandidatList = () => {
+  const { loading, error, data } = useQuery(getCandidatListWithDisplaySettings, {
+    variables: { organisationId: "lls" }
+  });
+
+  if (loading) {
+    return <Spin/>;
+  }
+  
+  if (lodashIsEmpty(data.candidatList)) {
+    return (
+      <Empty 
+        style={{ padding: 100 }}
+        image={Empty.PRESENTED_IMAGE_SIMPLE} 
+        description={"Vous n'avez pas de candidats"}>
+        <Button type="primary">Créer</Button>
+      </Empty>
+    );
+  }
+
+  const columns = [
+    ...start,
+    ...data.candidatListDisplaySettings,
+    ...end
+  ];
+
+  return <Table dataSource={data.candidatList} columns={columns} />;
 };
 
 export default CandidatList;
