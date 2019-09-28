@@ -1,28 +1,11 @@
 import React from "react";
-import { Layout, Spin, Progress, Statistic, Row, Col, Card } from "antd";
-import { useQuery } from '@apollo/react-hooks';
-import { loader } from 'graphql.macro';
+import { Layout, Statistic, Row, Col, Card } from "antd";
 
 import "./Candidat.css";
-import { InternalError } from "../../errors";
 
-const { Header, Content } = Layout;
-const getCandidat = loader('./getCandidat.gql');
+const { Header } = Layout;
 
-const Candidat = ({ match }) => {
-    const { loading, error, data } = useQuery(getCandidat, {
-        variables: { id: match.params.candidatId }
-    });
-
-    if (loading) {
-        return <Spin />;
-    }
-
-    if (error) {
-        return <InternalError />
-    }
-
-    const { candidat } = data;
+const Candidat = ({ candidat }) => {
     const { currentSession } = candidat;
 
     return (
