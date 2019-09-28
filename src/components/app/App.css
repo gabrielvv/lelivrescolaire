@@ -1,0 +1,13 @@
+.app-logo {
+  width: 180px;
+  padding-left: 18px;
+}
+
+.app-logo-container--collapsed .app-logo {
+  padding-left: 24px;
+}
+
+.app-logo-container {
+  display: flex;
+  overflow: hidden;
+}
