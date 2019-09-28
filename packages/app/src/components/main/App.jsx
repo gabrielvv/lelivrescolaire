@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "./App.css";
 import logo from "logo.svg";
 import logoTitle from "logo-title.svg";
-import { CandidatList } from "components/candidat"
+import { CandidatList, Candidat } from "components/candidat"
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -56,9 +56,10 @@ const App = () => {
           </Header> */}
           <Content className="lls-content">
             <Switch>
-              <Route path="/">
+              <Route exact path="/">
                 <CandidatList></CandidatList>
               </Route>
+              <Route path="/candidat/:candidatId" component={Candidat} />
             </Switch>
           </Content>
           {/* <Footer style={{ textAlign: "center" }}>

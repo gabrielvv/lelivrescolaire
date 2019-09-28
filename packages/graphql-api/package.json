@@ -5,6 +5,7 @@
   "author": "gabrielvv-tfm <gvautrin.external@lafourchette.com>",
   "homepage": "https://github.com/gabrielvv-tfm/lelivrescolaire#readme",
   "license": "ISC",
+  "private": true,
   "main": "lib/graphql-api.js",
   "directories": {
     "lib": "lib",

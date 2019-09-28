@@ -8,7 +8,9 @@ export const defaults = {
 
 export const resolvers = {
   Query: {
-    candidat: (id) => candidatList.find(({id: candidatId}) => candidatId === id),
+    candidat: (root, { id }) => {
+      return candidatList.find(({id: candidatId}) => candidatId === id);
+    },
     candidatList: () => candidatList,
     candidatListDisplaySettings: () => columns,
   },

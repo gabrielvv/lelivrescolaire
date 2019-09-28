@@ -6,6 +6,7 @@ import lodashIsEmpty from 'lodash/isEmpty';
 
 import "./CandidatList.css";
 import { start, end } from './fixedColumns';
+import { InternalError } from '../../errors';
 
 const getCandidatListWithDisplaySettings = loader('./getCandidatListWithDisplaySettings.gql');
 
@@ -16,6 +17,10 @@ const CandidatList = () => {
 
   if (loading) {
     return <Spin/>;
+  }
+
+  if (error) {
+    return <InternalError/>
   }
   
   if (lodashIsEmpty(data.candidatList)) {

@@ -20,7 +20,8 @@ const sessionStatusToIconMapper = {
         twoToneColor: '#52c41a',
     },
     IN_PROGRESS: {
-        type: 'loading'
+        type: 'loading',
+        style: { color: 'blue' }
     },
     FINISHED: {
         type: 'check-circle',
