@@ -1,6 +1,7 @@
-query getCandidat($id: ID!) {
-    candidat(id: $id) @client {
+  query getEleveListWithDisplaySettings($classeId: ID!) {
+    eleveList(classeId: $classeId) @client {
       id
+      key: id
       lastname
       firstname
       email
@@ -28,4 +29,9 @@ query getCandidat($id: ID!) {
         }
       }
     }
-}
+    eleveListDisplaySettings(classeId: $classeId) @client {
+      title
+      dataIndex
+      key
+    }
+  }

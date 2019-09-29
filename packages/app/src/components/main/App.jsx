@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "./App.css";
 import logo from "logo.svg";
 import logoTitle from "logo-title.svg";
-import { CandidatList, Candidat } from "components/candidat"
+import { EleveList, Eleve } from "components/eleve";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -33,7 +33,7 @@ const App = () => {
             <Menu.Item key="1">
               <Link to="/">
                 <Icon type="team" />
-                <span>Candidats</span>
+                <span>Eleves</span>
               </Link>
             </Menu.Item>
           </Menu>
@@ -57,9 +57,9 @@ const App = () => {
           <Content className="lls-content">
             <Switch>
               <Route exact path="/">
-                <CandidatList></CandidatList>
+                <EleveList></EleveList>
               </Route>
-              <Route path="/candidat/:candidatId" component={Candidat} />
+              <Route path="/eleve/:eleveId" component={Eleve} />
             </Switch>
           </Content>
           {/* <Footer style={{ textAlign: "center" }}>

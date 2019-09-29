@@ -1,7 +1,6 @@
-  query getCandidatListWithDisplaySettings($organisationId: ID!) {
-    candidatList(organisationId: $organisationId) @client {
+query getEleve($id: ID!) {
+    eleve(id: $id) @client {
       id
-      key: id
       lastname
       firstname
       email
@@ -29,9 +28,4 @@
         }
       }
     }
-    candidatListDisplaySettings(organisationId: $organisationId) @client {
-      title
-      dataIndex
-      key
-    }
-  }
+}

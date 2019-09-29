@@ -1,34 +1,23 @@
-import { candidats as candidatList, columns } from "fixtures/db.json";
-import lodashIsEmpty from 'lodash/isEmpty';
+import { EmailAddress, DateTime } from "@okgrow/graphql-scalars";
+import { eleves as eleveList, columns } from "fixtures/db.json";
 
 export const defaults = {
-  candidatList: [],
-  candidatListDisplaySettings: [],
+  eleveList: [],
+  eleveListDisplaySettings: []
 };
 
 export const resolvers = {
+  EmailAddress,
+  DateTime,
   Query: {
-    candidat: (root, { id }) => {
-      return candidatList.find(({id: candidatId}) => candidatId === id);
+    eleve: (root, { id }) => {
+      return eleveList.find(({ id: eleveId }) => eleveId === id);
     },
-    candidatList: () => candidatList,
-    candidatListDisplaySettings: () => columns,
+    eleveList: () => eleveList,
+    eleveListDisplaySettings: () => columns
   },
-  Candidat: {
-    initials: ({ lastname, firstname }) => `${lastname[0]}${firstname[0]}`.toUpperCase(),
-    tags: ({ currentSession }) => [currentSession].reduce((tags, { constraints }) => {
-      return [...tags, ...constraints.map(constraint => constraint.constraintType)];
-    }, []),
-  },
-  Session: {
-    timeSpent: ({ exercises }) => exercises.reduce((totalTimeSpent, { timeSpent }) => {
-      return totalTimeSpent + timeSpent;
-    }, 0),
-    successRate: ({ exercises }) => {
-      const successRateSum = exercises.reduce((sum, { successRate }) => {
-        return sum + successRate;
-      }, 0);
-      return lodashIsEmpty(exercises) ? 0 : parseInt(successRateSum / exercises.length);
-    },
+  Eleve: {
+    initials: ({ lastname, firstname }) =>
+      `${lastname[0]}${firstname[0]}`.toUpperCase()
   }
 };
