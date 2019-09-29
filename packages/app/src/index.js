@@ -12,7 +12,6 @@ import { typeDefs } from "./schema";
 
 const cache = new InMemoryCache();
 const client = new ApolloClient({
-  uri: "https://dog-graphql-api.glitch.me/graphql",
   cache,
   resolvers,
   typeDefs
