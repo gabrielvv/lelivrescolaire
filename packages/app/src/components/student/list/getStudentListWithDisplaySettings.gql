@@ -1,0 +1,12 @@
+#import "../studentFragment.gql"
+
+query getStudentListWithDisplaySettings($classId: ID!) {
+  studentList(classId: $classId) @client {
+    ...studentFragment
+  }
+  studentListDisplaySettings(classId: $classId) @client {
+    title
+    dataIndex
+    key
+  }
+}

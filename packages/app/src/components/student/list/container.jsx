@@ -4,16 +4,16 @@ import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 import lodashIsEmpty from "lodash/isEmpty";
 
-import EleveList from "./EleveList";
+import StudentList from "./StudentList";
 import { InternalError } from "../../errors";
 
-const getEleveListWithDisplaySettings = loader(
-  "./getEleveListWithDisplaySettings.gql"
+const getStudentListWithDisplaySettings = loader(
+  "./getStudentListWithDisplaySettings.gql"
 );
 
-const EleveListContainer = () => {
-  const { loading, error, data } = useQuery(getEleveListWithDisplaySettings, {
-    variables: { classeId: "lls" }
+const StudentListContainer = ({ match }) => {
+  const { loading, error, data } = useQuery(getStudentListWithDisplaySettings, {
+    variables: { classId: match.params.classId }
   });
 
   if (loading) {
@@ -21,22 +21,23 @@ const EleveListContainer = () => {
   }
 
   if (error) {
+    console.error(error);
     return <InternalError />;
   }
 
-  if (lodashIsEmpty(data.eleveList)) {
+  if (lodashIsEmpty(data.studentList)) {
     return (
       <Empty
         style={{ padding: 100 }}
         image={Empty.PRESENTED_IMAGE_SIMPLE}
-        description={"Vous n'avez pas de eleves"}
+        description={"Vous n'avez pas de students"}
       >
         <Button type="primary">Créer</Button>
       </Empty>
     );
   }
 
-  return <EleveList {...data} />;
+  return <StudentList {...data} />;
 };
 
-export default EleveListContainer;
+export default StudentListContainer;

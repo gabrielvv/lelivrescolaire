@@ -1,0 +1,32 @@
+fragment studentFragment on Student {
+    id
+    key: id
+    lastname
+    firstname
+    email
+    avatar { initials, imageSrc }
+    successRate
+    completion
+    online
+    lessons {
+        successRate
+        completion
+        exercises {
+            name
+            description
+            timeSpent
+            startedAt
+            finishedAt
+            schedule {
+                maxDuration
+            }
+            successRate
+            completion
+            status
+            traits {
+                traitType
+                ratio
+            }
+        }
+    }
+}

@@ -1,170 +1,229 @@
 {
-  "eleves": [
+  "students": [
     {
       "id": "1",
+      "classId": "1",
       "firstname": "Luke",
       "lastname": "Skywalker",
       "email": "luke.skywalker@rebel.io",
-      "__typename": "Eleve",
-      "exercises": []
+      "__typename": "Student",
+      "lessons": []
     },
     {
       "id": "2",
+      "classId": "1",
       "firstname": "Dark",
       "lastname": "Vador",
       "email": "darth.vader@blackstar.io",
-      "__typename": "Eleve",
-      "exercises": [
+      "__typename": "Student",
+      "lessons": [
         {
-          "__typename": "Exercise",
-          "status": "READY",
-          "name": "Développer une interface en ReactJS",
-          "description": "...",
-          "constraints": [
+          "__typename": "Lesson",
+          "exercises": [
             {
-              "constraintType": "REACTJS",
-              "ratio": 75,
-              "__typename": "Constraint"
-            },
-            {
-              "constraintType": "FUNCTIONAL_PROGRAMMING",
-              "ratio": 25,
-              "__typename": "Constraint"
+              "__typename": "Exercise",
+              "exerciseId": "1",
+              "status": "READY",
+              "name": "Equation du 1er degré",
+              "description": "...",
+              "traits": [
+                {
+                  "traitType": "EQUATION",
+                  "ratio": 75,
+                  "__typename": "Trait"
+                },
+                {
+                  "traitType": "LOGIQUE",
+                  "ratio": 25,
+                  "__typename": "Trait"
+                }
+              ],
+              "timeSpent": 0,
+              "successRate": 0,
+              "completion": 20,
+              "schedule": null,
+              "startedAt": null,
+              "finishedAt": null
             }
-          ],
-          "timeSpent": 0,
-          "timeLimit": 240,
-          "successRate": 0
+          ]
         }
       ]
     },
     {
       "id": "3",
+      "classId": "1",
       "firstname": "John",
       "lastname": "Brown",
       "email": "johnnybrown@gmail.com",
-      "__typename": "Eleve",
-      "exercises": [
+      "__typename": "Student",
+      "lessons": [
         {
-          "__typename": "Exercise",
-          "status": "IN_PROGRESS",
-          "name": "Déployer une stack de CI/CD",
-          "description": "...",
-          "constraints": [
+          "__typename": "Lesson",
+          "exercises": [
             {
-              "constraintType": "DEVOPS",
-              "ratio": 50,
-              "__typename": "Constraint"
+              "__typename": "Exercise",
+              "status": "IN_PROGRESS",
+              "exerciseId": "1",
+              "name": "Equation du 1er Degré",
+              "description": "...",
+              "traits": [
+                {
+                  "traitType": "EQUATION",
+                  "ratio": 75,
+                  "__typename": "Trait"
+                },
+                {
+                  "traitType": "LOGIQUE",
+                  "ratio": 25,
+                  "__typename": "Trait"
+                }
+              ],
+              "timeSpent": 230,
+              "schedule": {
+                "__typename": "ExerciseSchedule",
+                "maxDuration": 240
+              },
+              "successRate": 38,
+              "completion": 100,
+              "startedAt": null,
+              "finishedAt": null
             },
             {
-              "constraintType": "KUBERNETES",
-              "ratio": 50,
-              "__typename": "Constraint"
+              "__typename": "Exercise",
+              "exerciseId": "2",
+              "status": "READY",
+              "name": "Addition",
+              "description": "...",
+              "traits": [
+                {
+                  "traitType": "OPERATIONS",
+                  "ratio": 100,
+                  "__typename": "Trait"
+                }
+              ],
+              "timeSpent": 0,
+              "schedule": {
+                "__typename": "ExerciseSchedule",
+                "maxDuration": 240
+              },
+              "successRate": 0,
+              "completion": 0,
+              "startedAt": null,
+              "finishedAt": null
             }
-          ],
-          "timeSpent": 230,
-          "timeLimit": 240,
-          "successRate": 0
-        },
-        {
-          "__typename": "Exercise",
-          "status": "READY",
-          "name": "Kubernetes Basics",
-          "description": "...",
-          "constraints": [
-            {
-              "constraintType": "KUBERNETES",
-              "ratio": 100,
-              "__typename": "Constraint"
-            }
-          ],
-          "timeSpent": 0,
-          "timeLimit": 240,
-          "successRate": 0
+          ]
         }
       ]
     },
     {
       "id": "4",
+      "classId": "1",
       "firstname": "Jim",
       "lastname": "Green",
       "email": "jimmy@example.com",
-      "__typename": "Eleve",
-      "exercises": [
+      "__typename": "Student",
+      "lessons": [
         {
-          "__typename": "Exercise",
-          "status": "FINISHED",
-          "name": "Python Basics",
-          "description": "...",
-          "constraints": [
+          "__typename": "Lesson",
+          "exercises": [
             {
-              "constraintType": "PYTHON",
-              "ratio": 100,
-              "__typename": "Constraint"
-            }
-          ],
-          "timeSpent": 150,
-          "timeLimit": 240,
-          "successRate": 33
-        },
-        {
-          "__typename": "Exercise",
-          "status": "FINISHED",
-          "name": "K-Mean",
-          "description": "...",
-          "constraints": [
-            {
-              "constraintType": "PYTHON",
-              "ratio": 50,
-              "__typename": "Constraint"
+              "__typename": "Exercise",
+              "exerciseId": "3",
+              "status": "FINISHED",
+              "name": "Fonction affine",
+              "description": "...",
+              "traits": [
+                {
+                  "traitType": "FONCTIONS",
+                  "ratio": 100,
+                  "__typename": "Trait"
+                }
+              ],
+              "timeSpent": 150,
+              "schedule": {
+                "__typename": "ExerciseSchedule",
+                "maxDuration": 240
+              },
+              "successRate": 33,
+              "completion": 50,
+              "startedAt": null,
+              "finishedAt": null
             },
             {
-              "constraintType": "DATA_SCIENCE",
-              "ratio": 50,
-              "__typename": "Constraint"
+              "__typename": "Exercise",
+              "status": "FINISHED",
+              "name": "K-Mean",
+              "description": "...",
+              "traits": [
+                {
+                  "traitType": "STATISTIQUE",
+                  "ratio": 100,
+                  "__typename": "Trait"
+                }
+              ],
+              "timeSpent": 1500,
+              "schedule": {
+                "__typename": "ExerciseSchedule",
+                "maxDuration": 0
+              },
+              "successRate": 63,
+              "completion": 100,
+              "startedAt": null,
+              "finishedAt": null
             }
-          ],
-          "timeSpent": 1500,
-          "timeLimit": 0,
-          "successRate": 63
+          ]
         }
       ]
     },
     {
       "id": "5",
+      "classId": "1",
       "firstname": "Gabriel",
       "lastname": "Vautrin",
       "email": "gabriel.vautrin@gmail.com",
-      "__typename": "Eleve",
-      "exercises": []
+      "__typename": "Student",
+      "lessons": []
     },
     {
       "id": "6",
+      "classId": "1",
       "firstname": "Dan",
       "lastname": "Abramov",
       "email": "darth.vader@blackstar.io",
-      "__typename": "Eleve",
-      "exercises": [
+      "__typename": "Student",
+      "lessons": [
         {
-          "__typename": "Exercise",
-          "status": "FINISHED",
-          "name": "Développer une interface en ReactJS",
-          "description": "...",
-          "constraints": [
+          "__typename": "Lesson",
+          "exercises": [
             {
-              "constraintType": "REACTJS",
-              "ratio": 75,
-              "__typename": "Constraint"
-            },
-            {
-              "constraintType": "FUNCTIONAL_PROGRAMMING",
-              "ratio": 25,
-              "__typename": "Constraint"
+              "__typename": "Exercise",
+              "status": "FINISHED",
+              "exerciseId": "5",
+              "name": "Monopoly",
+              "description": "...",
+              "traits": [
+                {
+                  "traitType": "COMPTER",
+                  "ratio": 75,
+                  "__typename": "Trait"
+                },
+                {
+                  "traitType": "JOUER",
+                  "ratio": 25,
+                  "__typename": "Trait"
+                }
+              ],
+              "timeSpent": 10,
+              "schedule": {
+                "__typename": "ExerciseSchedule",
+                "maxDuration": 240
+              },
+              "successRate": 100,
+              "completion": 100,
+              "startedAt": null,
+              "finishedAt": null
             }
-          ],
-          "timeSpent": 10,
-          "timeLimit": 240,
-          "successRate": 100
+          ]
         }
       ]
     }
@@ -172,12 +231,14 @@
   "columns": [
     {
       "title": "Nom",
+      "classId": "1",
       "dataIndex": "lastname",
       "key": "lastname",
       "__typename": "Column"
     },
     {
       "title": "Prénom",
+      "classId": "1",
       "dataIndex": "firstname",
       "key": "firstname",
       "__typename": "Column"

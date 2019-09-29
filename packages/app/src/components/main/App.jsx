@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { Layout, Menu, Icon, Badge } from "antd";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  Redirect
+} from "react-router-dom";
 
 import "./App.css";
 import logo from "logo.svg";
 import logoTitle from "logo-title.svg";
-import { EleveList, Eleve } from "components/eleve";
+import { StudentList, Student } from "components/student";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -33,7 +39,7 @@ const App = () => {
             <Menu.Item key="1">
               <Link to="/">
                 <Icon type="team" />
-                <span>Eleves</span>
+                <span>Ma classe</span>
               </Link>
             </Menu.Item>
           </Menu>
@@ -57,9 +63,11 @@ const App = () => {
           <Content className="lls-content">
             <Switch>
               <Route exact path="/">
-                <EleveList></EleveList>
+                <Redirect to="/classe/1" />
               </Route>
-              <Route path="/eleve/:eleveId" component={Eleve} />
+              ,
+              <Route path="/classe/:classId" component={StudentList} />
+              <Route path="/student/:studentId" component={Student} />
             </Switch>
           </Content>
           {/* <Footer style={{ textAlign: "center" }}>

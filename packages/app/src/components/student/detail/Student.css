@@ -1,0 +1,23 @@
+.lls-student__header {
+  background-color: #fff;
+  display: flex;
+  padding: 0 30px;
+}
+
+.lls-student__header-name {
+  padding-left: 15px;
+  font-size: 1.5em;
+  font-weight: 500;
+  flex: 2;
+}
+
+.lls-student__header .ant-badge-dot {
+  position: absolute;
+  top: 15px;
+}
+
+.lls-student__header-right-area {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
