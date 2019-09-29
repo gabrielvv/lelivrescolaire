@@ -29,7 +29,6 @@ const ActionsContainer = ({ id, defaultClassId }) => {
         }
       });
 
-      console.log(deleteStudent);
       if (deleteStudent.done) {
         message.success("Elève supprimé");
       }

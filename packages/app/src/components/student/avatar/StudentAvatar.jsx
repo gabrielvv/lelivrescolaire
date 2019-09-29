@@ -1,10 +1,27 @@
 import React from "react";
-import { Avatar, Badge } from "antd";
+import { Avatar, Badge, Skeleton } from "antd";
+import useImage from "use-image";
+import "./StudentAvatar.css";
 
 export const StudentAvatar = ({
   online,
   avatar: { initials, imageSrc: src }
 }) => {
+  const [image, status] = useImage(src);
+
+  if (status !== "loaded") {
+    return (
+      <Skeleton
+        loading={true}
+        avatar={true}
+        paragraph={false}
+        title={false}
+        shape="square"
+        size="large"
+      />
+    );
+  }
+
   const avatar = src ? (
     <Avatar shape="square" src={src} size="large"></Avatar>
   ) : (

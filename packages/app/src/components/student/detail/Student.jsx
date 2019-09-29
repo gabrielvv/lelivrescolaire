@@ -1,11 +1,27 @@
 import React from "react";
 import { Layout, Statistic, Row, Col, Card, Icon, Button } from "antd";
 import { Link } from "react-router-dom";
+import { CSSTransitionGroup } from "react-transition-group";
 
 import "./Student.css";
 import { StudentAvatar } from "../avatar/StudentAvatar";
+import { withAnimation } from "../../animations/withAnimation";
 
 const { Header } = Layout;
+
+const StudentName = ({ classes, lastname, firstname }) => {
+  return (
+    <div className={"lls-student__header-name " + classes}>
+      {`${lastname} ${firstname}`}
+    </div>
+  );
+};
+
+const AnimatedStudentName = withAnimation(
+  StudentName,
+  "lls-student__header-name--transition",
+  50
+);
 
 const Student = ({ student, previousId, nextId }) => {
   const { successRate } = student;
@@ -18,9 +34,10 @@ const Student = ({ student, previousId, nextId }) => {
             avatar={student.avatar}
           ></StudentAvatar>
         </div>
-        <div className="lls-student__header-name">
-          {`${student.lastname} ${student.firstname}`}
-        </div>
+        <AnimatedStudentName
+          lastname={student.lastname}
+          firstname={student.firstname}
+        />
         <div className="lls-student__header-right-area">
           <Button.Group size="large">
             <Link to={"/student/" + previousId}>

@@ -4,11 +4,19 @@
   padding: 0 30px;
 }
 
+.lls-student__header-name.lls-student__header-name--transition {
+  left: 150px;
+  opacity: 0;
+}
 .lls-student__header-name {
   padding-left: 15px;
   font-size: 1.5em;
   font-weight: 500;
   flex: 2;
+  position: relative;
+  left: 0;
+  opacity: 1;
+  transition: left 0.8s ease-out, opacity 0.8s ease-out;
 }
 
 .lls-student__header .ant-badge-dot {
@@ -20,4 +28,13 @@
   display: flex;
   flex: 1;
   justify-content: flex-end;
+}
+
+.lls-student__header-avatar {
+  display: flex;
+  align-items: center;
+}
+
+.lls-student__header-avatar .ant-skeleton-header {
+  display: flex;
 }
