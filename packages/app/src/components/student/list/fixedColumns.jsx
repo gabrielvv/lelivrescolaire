@@ -1,10 +1,9 @@
 import React from "react";
-import { Divider, Progress } from "antd";
-import { Link } from "react-router-dom";
 import { StudentAvatar } from "../avatar/StudentAvatar";
 import { withDynamicDisplay } from "../../animations/withDynamicDisplay";
 import Success from "../statistics/Success";
 import Completion from "../statistics/Completion";
+import Actions from "./Actions";
 
 const SuccessWithDynamicDisplay = withDynamicDisplay(Success, "successRate");
 const CompletionWithDynamicDisplay = withDynamicDisplay(
@@ -43,14 +42,9 @@ const end = [
   {
     title: "Actions",
     key: "action",
+    width: 200,
     dataIndex: "id",
-    render: (id, record) => (
-      <span>
-        <Link to={`/student/${id}`}>Edit</Link>
-        <Divider type="vertical" />
-        <a>Delete</a>
-      </span>
-    )
+    render: id => <Actions id={id} />
   }
 ];
 

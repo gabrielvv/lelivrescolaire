@@ -7,7 +7,13 @@ import { start, end } from "./fixedColumns";
 const StudentList = ({ studentList, studentListDisplaySettings }) => {
   const columns = [...start, ...studentListDisplaySettings, ...end];
 
-  return <Table dataSource={studentList} columns={columns} />;
+  return (
+    <Table
+      dataSource={studentList}
+      columns={columns}
+      pagination={{ pageSize: 50 }}
+    />
+  );
 };
 
 export default StudentList;

@@ -1,0 +1,7 @@
+#import "../studentFragment.gql"
+
+query getStudentList($classId: ID!) {
+  studentList(classId: $classId) @client {
+    ...studentFragment
+  }
+}

@@ -2,12 +2,13 @@ import {
   EmailAddressResolver as EmailAddress,
   DateTimeResolver as DateTime
 } from "graphql-scalars";
-import { students as studentList, columns, images } from "fixtures/db.json";
 
 import {
   reduceValueFromCollection,
   reduceValueFromSubCollection
 } from "./utils";
+
+import { students as studentList, columns } from "fixtures/db.json";
 
 export const defaults = {
   studentList: [],
@@ -58,5 +59,11 @@ export const resolvers = {
   Lesson: {
     successRate: reduceValueFromCollection("exercises", "successRate"),
     completion: reduceValueFromCollection("exercises", "completion")
+  },
+  Mutation: {
+    deleteStudent: (root, { id }) => ({
+      __typename: "MutationResult",
+      done: true
+    })
   }
 };

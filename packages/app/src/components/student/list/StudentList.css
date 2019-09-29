@@ -1,3 +1,7 @@
 td.column-session-status {
   text-align: left !important;
 }
+
+.ant-pagination {
+  margin: 16px 16px !important;
+}

@@ -25,12 +25,12 @@ const StudentListContainer = ({ match }) => {
     return <InternalError />;
   }
 
-  if (lodashIsEmpty(data.studentList)) {
+  if (!data || !data.studentList || lodashIsEmpty(data.studentList)) {
     return (
       <Empty
         style={{ padding: 100 }}
         image={Empty.PRESENTED_IMAGE_SIMPLE}
-        description={"Vous n'avez pas de students"}
+        description={"Vous n'avez pas d'élèves"}
       >
         <Button type="primary">Créer</Button>
       </Empty>

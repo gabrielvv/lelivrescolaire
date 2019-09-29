@@ -100,11 +100,19 @@ export const typeDefs = `
     key: String!
   }
 
+  type MutationStatus {
+    done: Boolean
+  }
+
   type Query {
     student(id: ID!): Student
     next(id: ID!): Student
     previous(id: ID!): Student
     studentList(classId: ID!): [Student]
     studentListDisplaySettings(classId: ID!): [Column]
+  }
+
+  type Mutation {
+    deleteStudent(id: ID!): MutationStatus
   }
 `;
