@@ -29,14 +29,7 @@ const AnimatedStudentName = withAnimation(
 );
 
 const Student = ({ student, previousId, nextId }) => {
-  const {
-    successRate,
-    completion,
-    online,
-    avatar,
-    lastname,
-    firstname
-  } = student;
+  const { online, avatar, lastname, firstname } = student;
   const exerciseCountByStatus = getExerciseCountByStatus(student);
   const lessonCountByStatus = {
     ready: 3,

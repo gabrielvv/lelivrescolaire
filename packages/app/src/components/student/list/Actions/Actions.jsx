@@ -16,7 +16,7 @@ export default ({ id, onDeleteOk }) => {
 
   return (
     <span>
-      <Link to={`/student/${id}`}>Editer</Link>
+      <Link to={`/student/${id}`}>Détails</Link>
       <Divider type="vertical" />
       <Button type="link" onClick={showDeleteConfirm}>
         Supprimer

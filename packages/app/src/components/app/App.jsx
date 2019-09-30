@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Layout, Menu, Icon, Badge } from "antd";
+import { Layout, Menu, Icon } from "antd";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,11 +13,10 @@ import logo from "logo.svg";
 import logoTitle from "logo-title.svg";
 import { StudentList, Student } from "components/student";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const App = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const toggle = () => setCollapsed(!collapsed);
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
     <Router>

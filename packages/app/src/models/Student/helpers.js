@@ -1,4 +1,4 @@
-export const getExerciseCountByStatus = student => {
+const getExerciseCountByStatus = student => {
   const exerciseList = student.lessons.reduce((acc, lesson) => {
     lesson.exercises.forEach(exercise => acc.push(exercise));
     return acc;
@@ -22,3 +22,5 @@ export const getExerciseCountByStatus = student => {
     { finished: 0, inProgress: 0, ready: 0 }
   );
 };
+
+export { getExerciseCountByStatus };

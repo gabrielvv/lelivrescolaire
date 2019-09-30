@@ -8,7 +8,7 @@ import StudentList from "./StudentList";
 import { InternalError } from "../../errors";
 
 const getStudentListWithDisplaySettings = loader(
-  "./getStudentListWithDisplaySettings.gql"
+  "graphql/getStudentListWithDisplaySettings.gql"
 );
 
 const StudentListContainer = ({ match }) => {

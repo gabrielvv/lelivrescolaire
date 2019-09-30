@@ -5,8 +5,8 @@ import { loader } from "graphql.macro";
 
 import Actions from "./Actions";
 
-const deleteStudentMutation = loader("../deleteStudent.gql");
-const getStudentListQuery = loader("../getStudentList.gql");
+const deleteStudentMutation = loader("graphql/deleteStudent.gql");
+const getStudentListQuery = loader("graphql/getStudentList.gql");
 
 const ActionsContainer = ({ id, defaultClassId }) => {
   const [deleteStudent] = useMutation(deleteStudentMutation, {

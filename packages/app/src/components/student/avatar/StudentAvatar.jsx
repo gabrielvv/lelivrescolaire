@@ -7,7 +7,7 @@ export const StudentAvatar = ({
   online,
   avatar: { initials, imageSrc: src }
 }) => {
-  const [image, status] = useImage(src);
+  const [, status] = useImage(src);
 
   if (status !== "loaded") {
     return (

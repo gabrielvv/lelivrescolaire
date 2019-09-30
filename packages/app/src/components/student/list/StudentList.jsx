@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Drawer, Button, Layout } from "antd";
+import { Table, Drawer, Button } from "antd";
 import PropTypes from "prop-types";
 
 import "./StudentList.css";

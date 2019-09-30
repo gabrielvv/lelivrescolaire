@@ -6,7 +6,7 @@ import { loader } from "graphql.macro";
 import Student from "./Student";
 import { InternalError, NotFound } from "../../errors";
 
-const getStudent = loader("./getStudent.gql");
+const getStudent = loader("graphql/getStudent.gql");
 
 const StudentContainer = ({ match }) => {
   const { loading, error, data } = useQuery(getStudent, {

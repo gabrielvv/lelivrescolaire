@@ -3,17 +3,9 @@ import {
   DateTimeResolver as DateTime
 } from "graphql-scalars";
 
-import {
-  reduceValueFromCollection,
-  reduceValueFromSubCollection
-} from "./utils";
+import { reduceValueFromCollection, reduceValueFromSubCollection } from "utils";
 
 import { students as studentList, columns } from "fixtures/db.json";
-
-export const defaults = {
-  studentList: [],
-  studentListDisplaySettings: []
-};
 
 export const resolvers = {
   EmailAddress,
@@ -21,13 +13,13 @@ export const resolvers = {
   Query: {
     next: (root, { id }) => {
       const next = studentList.find(
-        ({ id: studentId }) => studentId == parseInt(id) + 1
+        ({ id: studentId }) => parseInt(studentId) === parseInt(id) + 1
       );
       return next ? next : studentList[0];
     },
     previous: (root, { id }) => {
       const previous = studentList.find(
-        ({ id: studentId }) => studentId == parseInt(id) - 1
+        ({ id: studentId }) => parseInt(studentId) === parseInt(id) - 1
       );
       return previous ? previous : studentList[studentList.length - 1];
     },
