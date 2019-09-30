@@ -5,3 +5,14 @@ td.column-session-status {
 .ant-pagination {
   margin: 16px 16px !important;
 }
+
+.add-student-btn {
+  position: absolute;
+  z-index: 10;
+  left: 10px;
+  top: 10px;
+}
+
+.add-student-btn-container {
+  position: relative;
+}

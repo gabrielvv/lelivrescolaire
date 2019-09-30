@@ -22,7 +22,7 @@ const App = () => {
   return (
     <Router>
       <Layout style={{ minHeight: "100vh" }}>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
+        <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
           <div
             className={
               "app-logo-container " +

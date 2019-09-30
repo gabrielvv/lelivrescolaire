@@ -38,3 +38,7 @@
 .lls-student__header-avatar .ant-skeleton-header {
   display: flex;
 }
+
+.ant-tabs-bar {
+  margin: 0 !important;
+}

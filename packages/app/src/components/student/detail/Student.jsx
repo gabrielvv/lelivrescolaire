@@ -1,13 +1,18 @@
 import React from "react";
-import { Layout, Statistic, Row, Col, Card, Icon, Button } from "antd";
+import { Layout, Tabs, Icon, Button } from "antd";
 import { Link } from "react-router-dom";
-import { CSSTransitionGroup } from "react-transition-group";
+import PropTypes from "prop-types";
 
 import "./Student.css";
 import { StudentAvatar } from "../avatar/StudentAvatar";
 import { withAnimation } from "../../animations/withAnimation";
+import { getExerciseCountByStatus } from "models/Student/helpers";
+import Summary from "./Summary";
+import Info from "./Info";
+import StudentPropType from "models/Student/propTypes";
 
 const { Header } = Layout;
+const { TabPane } = Tabs;
 
 const StudentName = ({ classes, lastname, firstname }) => {
   return (
@@ -20,24 +25,32 @@ const StudentName = ({ classes, lastname, firstname }) => {
 const AnimatedStudentName = withAnimation(
   StudentName,
   "lls-student__header-name--transition",
-  50
+  10
 );
 
 const Student = ({ student, previousId, nextId }) => {
-  const { successRate } = student;
+  const {
+    successRate,
+    completion,
+    online,
+    avatar,
+    lastname,
+    firstname
+  } = student;
+  const exerciseCountByStatus = getExerciseCountByStatus(student);
+  const lessonCountByStatus = {
+    ready: 3,
+    inProgress: 5,
+    finished: 10
+  };
+
   return (
     <Layout>
       <Header className="lls-student__header">
         <div className="lls-student__header-avatar">
-          <StudentAvatar
-            online={student.online}
-            avatar={student.avatar}
-          ></StudentAvatar>
+          <StudentAvatar online={online} avatar={avatar}></StudentAvatar>
         </div>
-        <AnimatedStudentName
-          lastname={student.lastname}
-          firstname={student.firstname}
-        />
+        <AnimatedStudentName lastname={lastname} firstname={firstname} />
         <div className="lls-student__header-right-area">
           <Button.Group size="large">
             <Link to={"/student/" + previousId}>
@@ -55,29 +68,31 @@ const Student = ({ student, previousId, nextId }) => {
           </Button.Group>
         </div>
       </Header>
-      <div style={{ background: "#ECECEC", padding: "30px" }}>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Card>
-              {/* <Progress
-                                type="circle"
-                                strokeColor={{
-                                    '0%': '#108ee9',
-                                    '100%': '#87d068',
-                                }}
-                                percent={currentSession.successRate}
-                            /> */}
-              <Statistic
-                title="Réussite"
-                value={successRate}
-                suffix="%"
-              ></Statistic>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+      <Tabs defaultActiveKey="1" style={{ background: "#FFF" }}>
+        <TabPane tab="Résumé" key="1" style={{ background: "#ECECEC" }}>
+          <Summary
+            exerciseCountByStatus={exerciseCountByStatus}
+            lessonCountByStatus={lessonCountByStatus}
+          />
+        </TabPane>
+        <TabPane tab="Exercices" key="2" style={{ background: "#ECECEC" }}>
+          <Summary
+            exerciseCountByStatus={exerciseCountByStatus}
+            lessonCountByStatus={lessonCountByStatus}
+          />
+        </TabPane>
+        <TabPane tab="Informations" key="3" style={{ background: "#ECECEC" }}>
+          <Info />
+        </TabPane>
+      </Tabs>
     </Layout>
   );
+};
+
+Student.propTypes = {
+  student: PropTypes.instanceOf(StudentPropType),
+  previousId: PropTypes.string,
+  nextId: PropTypes.string
 };
 
 export default Student;
