@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Drawer, Button } from "antd";
+import { Table, Drawer, Button, Layout } from "antd";
 import PropTypes from "prop-types";
 
 import "./StudentList.css";
@@ -19,20 +19,22 @@ const StudentList = ({ studentList, studentListDisplaySettings }) => {
         onClose={onClose}
         visible={drawerIsVisible}
       ></Drawer>
-      <div className="add-student-btn-container">
-        <Button
-          type="primary"
-          className="add-student-btn"
-          onClick={() => setDrawerVisibility(true)}
-        >
-          Ajouter
-        </Button>
-      </div>
-      <Table
-        dataSource={studentList}
-        columns={columns}
-        pagination={{ pageSize: 50 }}
-      />
+      <Layout style={{ background: "#fff" }}>
+        <Layout.Header style={{ background: "#fafafa", boxShadow: "none" }}>
+          <Button
+            type="primary"
+            onClick={() => setDrawerVisibility(true)}>
+            Ajouter
+          </Button>
+        </Layout.Header>
+        <Layout.Content>
+          <Table
+            dataSource={studentList}
+            columns={columns}
+            pagination={{ pageSize: 50 }}
+          />
+        </Layout.Content>
+      </Layout>
     </React.Fragment>
   );
 };
