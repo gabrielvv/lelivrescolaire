@@ -2,22 +2,9 @@ import {
   EmailAddressResolver as EmailAddress,
   DateTimeResolver as DateTime
 } from "graphql-scalars";
-import { loader } from "graphql.macro";
-import uuidv4 from 'uuid/v4';
 
-import cache from './cache';
-
-const getStudentListQuery = loader(
-  "graphql/getStudentListWithDisplaySettings.gql"
-);
-
-const getStudentListFromCache = () => {
-  const { studentList } = cache.readQuery({
-    query: getStudentListQuery,
-    variables: { classId: "1" }
-  });
-  return studentList;
-}
+import { fixtureCreate, fixtureUpdate } from '../fixtures'
+import { getStudentListFromCache } from 'graphql/local-hack';
 
 export const resolvers = {
   EmailAddress,
@@ -25,7 +12,7 @@ export const resolvers = {
   // DEV ONLY these resolvers are used to simulate an interaction with a real Graphql API
   Query: {
     next: (root, { id }) => {
-      const studentList = getStudentListFromCache();
+      const { studentList } = getStudentListFromCache();
       const studentIndex = studentList.findIndex(
         ({ id: studentId }) => studentId === id
       );
@@ -36,7 +23,7 @@ export const resolvers = {
       return studentList[0];
     },
     previous: (root, { id }) => {
-      const studentList = getStudentListFromCache();
+      const { studentList } = getStudentListFromCache();
       const studentIndex = studentList.findIndex(
         ({ id: studentId }) => studentId === id
       );
@@ -46,7 +33,7 @@ export const resolvers = {
       }
       return studentList[studentList.length - 1];
     },
-    student: (root, { id }) => getStudentListFromCache().find(({ id: studentId }) => studentId === id) || null,
+    student: (root, { id }) => getStudentListFromCache().studentList.find(({ id: studentId }) => studentId === id) || null,
   },
   Mutation: {
     // eslint-disable-next-line no-unused-vars
@@ -54,22 +41,7 @@ export const resolvers = {
       __typename: "MutationResult",
       done: true
     }),
-    createStudent: (root, { input }) => ({
-      __typename: "Student",
-      ...input,
-      email: "foo@bar.com",
-      id: uuidv4(),
-      key: uuidv4(),
-      avatar: {
-        __typename: "Avatar",
-        initials: `${input.lastname[0]}${input.firstname[0]}`.toUpperCase(),
-        imageSrc: "https://i.pravatar.cc/150?img=" + parseInt(Math.random() * 50)
-      },
-      isOnline: Math.random() > 0.5,
-      completion: 0,
-      successRate: 0,
-      lessons: [],
-      classId: "1",
-    })
+    createStudent: (root, { input }) => fixtureCreate(input),
+    updateStudent: (root, { input }) => fixtureUpdate(input),
   }
 };

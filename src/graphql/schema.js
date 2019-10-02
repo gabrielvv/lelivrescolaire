@@ -112,15 +112,22 @@ export const typeDefs = `
     studentListDisplaySettings(classId: ID!): [Column]
   }
 
-  input StudentCreationInput {
+  input CreateStudentInput {
     lastname: String!
     firstname: String!
     classId: ID!
   }
 
+  input UpdateStudentInput {
+    lastname: String!
+    firstname: String!
+    id: ID!
+  }
+
   type Mutation {
     deleteStudent(id: ID!): MutationStatus
-    createStudent(input: StudentCreationInput): Student
+    createStudent(input: CreateStudentInput): Student
+    updateStudent(input: UpdateStudentInput): Student
   }
 
 `;

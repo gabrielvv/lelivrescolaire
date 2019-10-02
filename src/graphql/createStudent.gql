@@ -1,4 +1,4 @@
-mutation CreateStudent($input: StudentCreationInput) {
+mutation CreateStudent($input: CreateStudentInput) {
     createStudent(input: $input) @client {
         lastname
         firstname

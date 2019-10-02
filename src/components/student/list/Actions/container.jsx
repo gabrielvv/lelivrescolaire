@@ -2,35 +2,24 @@ import React from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { message } from "antd";
 import { loader } from "graphql.macro";
+import PropTypes from 'prop-types';
 
+import { afterDelete } from 'graphql/local-hack';
 import Actions from "./Actions";
 
 const deleteStudentMutation = loader("graphql/deleteStudent.gql");
-const getStudentListQuery = loader("graphql/getStudentListWithDisplaySettings.gql");
 
-const ActionsContainer = ({ id }) => {
+const ActionsContainer = ({ studentId, onEdit }) => {
   const [deleteStudent] = useMutation(deleteStudentMutation, {
-    // DEV ONLY we rely on the graphql cache for fixtures
     update(
       cache,
       {
-        data: { deleteStudent }
+        data: { deleteStudent: deletedStudent }
       }
     ) {
-      const { studentList, studentListDisplaySettings } = cache.readQuery({
-        query: getStudentListQuery,
-        variables: { classId: "1" }
-      });
-      cache.writeQuery({
-        query: getStudentListQuery,
-        variables: { classId: "1" },
-        data: {
-          studentList: studentList.filter(student => student.id !== id),
-          studentListDisplaySettings
-        }
-      });
-
-      if (deleteStudent.done) {
+      // DEV ONLY we rely on the graphql cache for fixtures
+      afterDelete(studentId);
+      if (deletedStudent.done) {
         message.success("Elève supprimé");
       }
     }
@@ -38,10 +27,15 @@ const ActionsContainer = ({ id }) => {
 
   const onDeleteOk = () =>
     deleteStudent({
-      variables: { id }
+      variables: { id: studentId }
     });
 
-  return <Actions id={id} onDeleteOk={onDeleteOk} />;
+  return <Actions studentId={studentId} onDeleteOk={onDeleteOk} onEdit={onEdit} />;
 };
+
+ActionsContainer.propTypes = {
+  studentId: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired
+}
 
 export default ActionsContainer;

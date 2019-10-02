@@ -32,7 +32,7 @@ const StudentListContainer = ({ match }) => {
 };
 
 StudentListContainer.propTypes = {
-  match: ReactRouterPropTypes.isRequired
+  match: ReactRouterPropTypes.match.isRequired
 }
 
 export default StudentListContainer;

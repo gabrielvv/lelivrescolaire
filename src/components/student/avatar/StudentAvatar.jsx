@@ -6,11 +6,12 @@ import "./StudentAvatar.css";
 
 const StudentAvatar = ({
   isOnline,
+  shouldDisplayStatus = true,
   avatar: { initials, imageSrc: src }
 }) => {
   const [, status] = useImage(src);
 
-  if (status !== "loaded") {
+  if (src && status !== "loaded") {
     return (
       <Badge className="ant-badge--skeleton" status={isOnline ? "success" : "warning"}>
         <Skeleton
@@ -33,10 +34,13 @@ const StudentAvatar = ({
     </Avatar>
   );
 
-  return <Badge status={isOnline ? "success" : "warning"}>{avatar}</Badge>;
+  return shouldDisplayStatus 
+    ? <Badge status={isOnline ? "success" : "warning"}>{avatar}</Badge>
+    : avatar;
 };
 
 StudentAvatar.propTypes = {
+  shouldDisplayStatus: PropTypes.bool.isRequired,
   isOnline: PropTypes.bool.isRequired,
   avatar: PropTypes.shape({
     imageSrc: PropTypes.string,

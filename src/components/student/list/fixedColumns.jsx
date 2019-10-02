@@ -3,7 +3,6 @@ import StudentAvatar from "../avatar/StudentAvatar";
 import withDynamicDisplay from "../../animations/withDynamicDisplay";
 import Success from "../statistics/Success";
 import Completion from "../statistics/Completion";
-import Actions from "./Actions";
 
 const SuccessWithDynamicDisplay = withDynamicDisplay(Success, "successRate");
 const CompletionWithDynamicDisplay = withDynamicDisplay(
@@ -30,14 +29,6 @@ const start = [
   }
 ];
 
-const end = [
-  {
-    title: "Actions",
-    key: "action",
-    width: 200,
-    dataIndex: "id",
-    render: function ActionsCell(id) { return <Actions id={id} /> }
-  }
-];
+const end = [];
 
 export { start, end };

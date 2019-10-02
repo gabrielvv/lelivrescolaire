@@ -3,7 +3,7 @@ import { Divider, Button, Modal } from "antd";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Actions = ({ id, onDeleteOk }) => {
+const Actions = ({ studentId, onDeleteOk, onEdit }) => {
   const showDeleteConfirm = () => {
     Modal.confirm({
       title: "Êtes vous sûr de vouloir supprimer cet élève?",
@@ -17,9 +17,12 @@ const Actions = ({ id, onDeleteOk }) => {
 
   return (
     <span>
-      <Link to={`/student/${id}`}>
-        <Button type="primary" ghost icon="edit"></Button>
-      </Link>
+      {/* <Link to={`/student/${studentId}`}> */}
+        <Button type="primary" ghost icon="edit" onClick={(event) => {
+          event.stopPropagation();
+          onEdit(studentId)
+        }}></Button>
+      {/* </Link> */}
       <Divider type="vertical"/>
       <Button type="danger" ghost onClick={showDeleteConfirm} icon="delete"></Button>
     </span>
@@ -27,8 +30,9 @@ const Actions = ({ id, onDeleteOk }) => {
 };
 
 Actions.propTypes = {
-  id: PropTypes.string.isRequired,
-  onDeleteOk: PropTypes.func.isRequired
+  studentId: PropTypes.string.isRequired,
+  onDeleteOk: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired
 }
 
 export default Actions;

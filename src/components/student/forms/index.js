@@ -1,3 +1,7 @@
-import CreateFromContainer from './container';
+import CreateFromContainer from './Create/container';
+import EditFromContainer from './Edit/container';
 
-export default CreateFromContainer;
+export { 
+    CreateFromContainer as CreateForm, 
+    EditFromContainer  as EditForm 
+}
