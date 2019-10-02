@@ -1,8 +1,9 @@
 import React from "react";
 import { Divider, Button, Modal } from "antd";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default ({ id, onDeleteOk }) => {
+const Actions = ({ id, onDeleteOk }) => {
   const showDeleteConfirm = () => {
     Modal.confirm({
       title: "Êtes vous sûr de vouloir supprimer cet élève?",
@@ -16,11 +17,18 @@ export default ({ id, onDeleteOk }) => {
 
   return (
     <span>
-      <Link to={`/student/${id}`}>Détails</Link>
-      <Divider type="vertical" />
-      <Button type="link" onClick={showDeleteConfirm}>
-        Supprimer
-      </Button>
+      <Link to={`/student/${id}`}>
+        <Button type="primary" ghost icon="edit"></Button>
+      </Link>
+      <Divider type="vertical"/>
+      <Button type="danger" ghost onClick={showDeleteConfirm} icon="delete"></Button>
     </span>
   );
 };
+
+Actions.propTypes = {
+  id: PropTypes.string.isRequired,
+  onDeleteOk: PropTypes.func.isRequired
+}
+
+export default Actions;

@@ -12,6 +12,7 @@ import "./App.css";
 import logo from "logo.svg";
 import logoTitle from "logo-title.svg";
 import { StudentList, Student } from "components/student";
+import { NotFound, InternalError } from "../errors";
 
 const { Content, Sider } = Layout;
 
@@ -38,27 +39,12 @@ const App = () => {
             <Menu.Item key="1">
               <Link to="/">
                 <Icon type="team" />
-                <span>Ma classe</span>
+                <span>Mes élèves</span>
               </Link>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="lls-content-layout">
-          {/* <Header className="lls-header lls-header--sticky">
-            <Icon
-              className="trigger"
-              type={collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={toggle}
-            />
-            <div className="header-right-section">
-              <Badge count={5} className="header-right-section__badge">
-                <Icon
-                  type="bell"
-                  className="header-right-section__bell"
-                />
-              </Badge>
-            </div>
-          </Header> */}
           <Content className="lls-content">
             <Switch>
               <Route exact path="/">
@@ -67,6 +53,8 @@ const App = () => {
               ,
               <Route path="/classe/:classId" component={StudentList} />
               <Route path="/student/:studentId" component={Student} />
+              <Route exact path="/500" component={InternalError} />
+              <Route component={NotFound} />
             </Switch>
           </Content>
           {/* <Footer style={{ textAlign: "center" }}>

@@ -1,12 +1,12 @@
 import React from "react";
 import { Row, Col, Card, Statistic } from "antd";
-import { withDynamicDisplay } from "../../animations/withDynamicDisplay";
+import withDynamicDisplay from "../../animations/withDynamicDisplay";
 
 const StatisticWithDynamicDisplay = withDynamicDisplay(
   Statistic,
   "value",
   50,
-  "linear"
+  withDynamicDisplay.CURVES.LINEAR
 );
 
 const SummaryCard = ({ ready, inProgress, finished, title }) => (

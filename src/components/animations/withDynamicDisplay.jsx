@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import lodashGet from "lodash/get";
 
-export const withDynamicDisplay = (
+const CURVES = {
+  EASE_IN: 'EASE_IN',
+  LINEAR: 'LINEAR',
+};
+
+const withDynamicDisplay = (
   Component,
   dynamicValueName,
   duration = 10,
-  curve = "ease-in"
+  curve = CURVES.EASE_IN
 ) => {
   const WithStateComponent = props => {
     const [dynamicValue, setDynamicValue] = useState(0);
@@ -17,7 +22,7 @@ export const withDynamicDisplay = (
           dynamicValue > targetValue ? dynamicValue - 1 : dynamicValue + 1;
 
         const time =
-          curve === "ease-in"
+          curve === CURVES.EASE_IN
             ? (duration * (targetValue - dynamicValue)) / targetValue
             : duration;
         const timeout = window.setTimeout(
@@ -32,3 +37,7 @@ export const withDynamicDisplay = (
   };
   return WithStateComponent;
 };
+
+withDynamicDisplay.CURVES = CURVES;
+
+export default withDynamicDisplay;

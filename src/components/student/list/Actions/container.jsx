@@ -6,9 +6,9 @@ import { loader } from "graphql.macro";
 import Actions from "./Actions";
 
 const deleteStudentMutation = loader("graphql/deleteStudent.gql");
-const getStudentListQuery = loader("graphql/getStudentList.gql");
+const getStudentListQuery = loader("graphql/getStudentListWithDisplaySettings.gql");
 
-const ActionsContainer = ({ id, defaultClassId }) => {
+const ActionsContainer = ({ id }) => {
   const [deleteStudent] = useMutation(deleteStudentMutation, {
     // DEV ONLY we rely on the graphql cache for fixtures
     update(
@@ -17,7 +17,7 @@ const ActionsContainer = ({ id, defaultClassId }) => {
         data: { deleteStudent }
       }
     ) {
-      const { studentList } = cache.readQuery({
+      const { studentList, studentListDisplaySettings } = cache.readQuery({
         query: getStudentListQuery,
         variables: { classId: "1" }
       });
@@ -25,7 +25,8 @@ const ActionsContainer = ({ id, defaultClassId }) => {
         query: getStudentListQuery,
         variables: { classId: "1" },
         data: {
-          studentList: studentList.filter(student => student.id !== id)
+          studentList: studentList.filter(student => student.id !== id),
+          studentListDisplaySettings
         }
       });
 

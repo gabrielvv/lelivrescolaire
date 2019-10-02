@@ -1,6 +1,6 @@
 import React from "react";
-import { StudentAvatar } from "../avatar/StudentAvatar";
-import { withDynamicDisplay } from "../../animations/withDynamicDisplay";
+import StudentAvatar from "../avatar/StudentAvatar";
+import withDynamicDisplay from "../../animations/withDynamicDisplay";
 import Success from "../statistics/Success";
 import Completion from "../statistics/Completion";
 import Actions from "./Actions";
@@ -15,27 +15,19 @@ const start = [
   {
     title: "",
     key: "avatar",
-    render: props => <StudentAvatar {...props} />
+    render: function AvatarCell(props) { return <StudentAvatar {...props} />; }
   },
   {
     title: "Réussite",
     key: "successRate",
     className: "column-session-success",
-    render: props => <SuccessWithDynamicDisplay {...props} />
+    render: function SuccessCell(props) { return <SuccessWithDynamicDisplay {...props} />; }
   },
   {
     title: "Avancement",
     key: "completion",
-    render: props => <CompletionWithDynamicDisplay {...props} />
+    render: function CompletionCell(props) { return <CompletionWithDynamicDisplay {...props} />; }
   }
-  // {
-  //   title: "Leçons",
-  //   key: "lessons",
-  //   dataIndex: "lessons",
-  //   render: ({ lessons }) => (
-  //     <Statistic
-  //   )
-  // }
 ];
 
 const end = [
@@ -44,7 +36,7 @@ const end = [
     key: "action",
     width: 200,
     dataIndex: "id",
-    render: id => <Actions id={id} />
+    render: function ActionsCell(id) { return <Actions id={id} /> }
   }
 ];
 

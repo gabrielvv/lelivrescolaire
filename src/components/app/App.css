@@ -69,6 +69,15 @@
   padding: 0;
   margin-top: 64px;
   margin: 24px 16px;
-  background: #fff;
   min-height: 280px;
 }
+
+@media screen and (max-width: 640px) {
+  .lls-content {
+    margin: 0px;
+  } 
+  .ant-layout-sider {
+    box-shadow: none;
+  }
+}
+

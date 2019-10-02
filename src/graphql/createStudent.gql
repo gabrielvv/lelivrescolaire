@@ -1,0 +1,12 @@
+mutation CreateStudent($input: StudentCreationInput) {
+    createStudent(input: $input) @client {
+        lastname
+        firstname
+        email
+        classId
+        lessons {
+            completion
+            successRate
+        }
+    }
+}

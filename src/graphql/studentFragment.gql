@@ -7,7 +7,7 @@ fragment studentFragment on Student {
     avatar { initials, imageSrc }
     successRate
     completion
-    online
+    isOnline
     lessons {
         successRate
         completion

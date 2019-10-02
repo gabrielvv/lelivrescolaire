@@ -3,8 +3,9 @@ import { Table, Drawer, Button, Layout } from "antd";
 import PropTypes from "prop-types";
 
 import "./StudentList.css";
-import { start, end } from "./fixedColumns";
-import StudentPropType from "models/Student/propTypes";
+import { start, end } from "./FixedColumns";
+import StudentShape from "models/Student/propTypes";
+import CreateForm from "../forms";
 
 const StudentList = ({ studentList, studentListDisplaySettings }) => {
   const [drawerIsVisible, setDrawerVisibility] = useState(false);
@@ -18,14 +19,20 @@ const StudentList = ({ studentList, studentListDisplaySettings }) => {
         width={720}
         onClose={onClose}
         visible={drawerIsVisible}
-      ></Drawer>
+      >
+        <CreateForm onSubmit={() => onClose()}/>
+      </Drawer>
       <Layout style={{ background: "#fff" }}>
-        <Layout.Header style={{ background: "#fafafa", boxShadow: "none" }}>
-          <Button
-            type="primary"
-            onClick={() => setDrawerVisibility(true)}>
-            Ajouter
+        <Layout.Header className="header">
+          <h2 className="header__title">Mes élèves</h2>
+          <div className="header__right-section">
+            <Button
+              type="primary"
+              icon="plus"
+              onClick={() => setDrawerVisibility(true)}>
+              Ajouter
           </Button>
+          </div>
         </Layout.Header>
         <Layout.Content>
           <Table
@@ -40,7 +47,13 @@ const StudentList = ({ studentList, studentListDisplaySettings }) => {
 };
 
 StudentList.propTypes = {
-  studentList: PropTypes.arrayOf(PropTypes.instanceOf(StudentPropType))
+  studentList: PropTypes.arrayOf(StudentShape),
+  studentListDisplaySettings: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    dataIndex: PropTypes.string,
+    render: PropTypes.func
+  }))
 };
 
 export default StudentList;

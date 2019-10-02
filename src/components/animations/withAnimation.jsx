@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-export const withAnimation = (Component, classesArg, duration = 100) => {
+const withAnimation = (Component, cssClassArg, duration = 100) => {
   const WithAnimationComponent = props => {
-    const [classes, setClassName] = useState(classesArg);
+    const [cssClass, setCSSClassName] = useState(cssClassArg);
     useEffect(() => {
-      const timeout = window.setTimeout(() => setClassName(""), duration);
+      const timeout = window.setTimeout(() => setCSSClassName(""), duration);
       return () => window.clearTimeout(timeout);
     });
-    return <Component classes={classes} {...props} />;
+    return <Component cssClass={cssClass} {...props} />;
   };
   return WithAnimationComponent;
 };
+
+export default withAnimation;

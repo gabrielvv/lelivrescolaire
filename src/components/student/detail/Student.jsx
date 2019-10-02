@@ -4,19 +4,18 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import "./Student.css";
-import { StudentAvatar } from "../avatar/StudentAvatar";
-import { withAnimation } from "../../animations/withAnimation";
+import StudentAvatar from "../avatar/StudentAvatar";
+import withAnimation from "../../animations/withAnimation";
 import { getExerciseCountByStatus } from "models/Student/helpers";
 import Summary from "./Summary";
-import Info from "./Info";
-import StudentPropType from "models/Student/propTypes";
+import StudentShape from "models/Student/propTypes";
 
 const { Header } = Layout;
 const { TabPane } = Tabs;
 
-const StudentName = ({ classes, lastname, firstname }) => {
+const StudentName = ({ cssClass, lastname, firstname }) => {
   return (
-    <div className={"lls-student__header-name " + classes}>
+    <div className={"lls-student__header-name " + cssClass}>
       {`${lastname} ${firstname}`}
     </div>
   );
@@ -29,7 +28,7 @@ const AnimatedStudentName = withAnimation(
 );
 
 const Student = ({ student, previousId, nextId }) => {
-  const { online, avatar, lastname, firstname } = student;
+  const { isOnline, avatar, lastname, firstname } = student;
   const exerciseCountByStatus = getExerciseCountByStatus(student);
   const lessonCountByStatus = {
     ready: 3,
@@ -38,30 +37,30 @@ const Student = ({ student, previousId, nextId }) => {
   };
 
   return (
-    <Layout>
+    <Layout className="lls-student">
       <Header className="lls-student__header">
         <div className="lls-student__header-avatar">
-          <StudentAvatar online={online} avatar={avatar}></StudentAvatar>
+          <StudentAvatar isOnline={isOnline} avatar={avatar}></StudentAvatar>
         </div>
         <AnimatedStudentName lastname={lastname} firstname={firstname} />
         <div className="lls-student__header-right-area">
-          <Button.Group size="large">
+          <Button.Group size="large" style={{ minWidth: 100 }}>
             <Link to={"/student/" + previousId}>
               <Button type="default">
                 <Icon type="left" />
-                Précédent
+                <span className="lls-student-selector__text">Précédent</span>
               </Button>
             </Link>
             <Link to={"/student/" + nextId}>
               <Button type="default">
-                Suivant
+                <span className="lls-student-selector__text">Suivant</span>
                 <Icon type="right" />
               </Button>
             </Link>
           </Button.Group>
         </div>
       </Header>
-      <Tabs defaultActiveKey="1" style={{ background: "#FFF" }}>
+      <Tabs defaultActiveKey="1">
         <TabPane tab="Résumé" key="1" style={{ background: "#ECECEC" }}>
           <Summary
             exerciseCountByStatus={exerciseCountByStatus}
@@ -74,16 +73,13 @@ const Student = ({ student, previousId, nextId }) => {
             lessonCountByStatus={lessonCountByStatus}
           />
         </TabPane>
-        <TabPane tab="Informations" key="3" style={{ background: "#ECECEC" }}>
-          <Info />
-        </TabPane>
       </Tabs>
     </Layout>
   );
 };
 
 Student.propTypes = {
-  student: PropTypes.instanceOf(StudentPropType),
+  student: StudentShape,
   previousId: PropTypes.string,
   nextId: PropTypes.string
 };

@@ -1,24 +1,27 @@
 import React from "react";
 import { Avatar, Badge, Skeleton } from "antd";
 import useImage from "use-image";
+import PropTypes from 'prop-types';
 import "./StudentAvatar.css";
 
-export const StudentAvatar = ({
-  online,
+const StudentAvatar = ({
+  isOnline,
   avatar: { initials, imageSrc: src }
 }) => {
   const [, status] = useImage(src);
 
   if (status !== "loaded") {
     return (
-      <Skeleton
-        loading={true}
-        avatar={true}
-        paragraph={false}
-        title={false}
-        shape="square"
-        size="large"
-      />
+      <Badge className="ant-badge--skeleton" status={isOnline ? "success" : "warning"}>
+        <Skeleton
+          loading={true}
+          avatar={true}
+          paragraph={false}
+          title={false}
+          shape="square"
+          size="large"
+        />
+      </Badge>
     );
   }
 
@@ -30,5 +33,15 @@ export const StudentAvatar = ({
     </Avatar>
   );
 
-  return <Badge status={online ? "success" : "warning"}>{avatar}</Badge>;
+  return <Badge status={isOnline ? "success" : "warning"}>{avatar}</Badge>;
 };
+
+StudentAvatar.propTypes = {
+  isOnline: PropTypes.bool.isRequired,
+  avatar: PropTypes.shape({
+    imageSrc: PropTypes.string,
+    initials: PropTypes.string.isRequired
+  })
+}
+
+export default StudentAvatar;

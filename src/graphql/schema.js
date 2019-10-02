@@ -82,8 +82,8 @@ export const typeDefs = `
 
   type Student {
     id: ID!
-    online: Boolean
-    classId: ID!
+    isOnline: Boolean
+    classId: String!
     lastname: String!
     firstname: String!
     email: String!
@@ -94,8 +94,8 @@ export const typeDefs = `
   }
 
   type Column {
-    classId: ID!
-    title: String!
+    classId: String!
+    title: ID!
     dataIndex: String!
     key: String!
   }
@@ -112,7 +112,15 @@ export const typeDefs = `
     studentListDisplaySettings(classId: ID!): [Column]
   }
 
+  input StudentCreationInput {
+    lastname: String!
+    firstname: String!
+    classId: ID!
+  }
+
   type Mutation {
     deleteStudent(id: ID!): MutationStatus
+    createStudent(input: StudentCreationInput): Student
   }
+
 `;
