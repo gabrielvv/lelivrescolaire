@@ -1,6 +1,15 @@
 import React from 'react'
 import { Card, Row, Col, Progress } from 'antd';
 
+import withDynamicDisplay from 'components/animations/withDynamicDisplay';
+
+const AnimatedProgress = withDynamicDisplay(
+    Progress, 
+    "percent",
+    5,
+    withDynamicDisplay.CURVES.LINEAR
+);
+
 const SkillsCard = () => (
     <Card title="Compétences">
         <Col>
@@ -9,7 +18,7 @@ const SkillsCard = () => (
                     <div>Mathématiques</div>
                 </Col>
                 <Col>
-                    <Progress percent={25} showInfo={false} />
+                    <AnimatedProgress percent={25} showInfo={false} />
                 </Col>
             </Row>
             <Row gutter={16}>
@@ -17,7 +26,7 @@ const SkillsCard = () => (
                     <div>Français</div>
                 </Col>
                 <Col>
-                    <Progress percent={80} showInfo={false} />
+                    <AnimatedProgress percent={80} showInfo={false} />
                 </Col>
             </Row>
             <Row>
@@ -25,7 +34,7 @@ const SkillsCard = () => (
                     <div>Histoire</div>
                 </Col>
                 <Col>
-                    <Progress percent={50} showInfo={false} />
+                    <AnimatedProgress percent={50} showInfo={false} />
                 </Col>
             </Row>
         </Col>

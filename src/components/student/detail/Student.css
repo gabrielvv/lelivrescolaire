@@ -53,7 +53,7 @@
   font-style: italic;
 }
 
-.lls-student__header .ant-badge-dot {
+.lls-student__header .ant-badge:not(.ant-badge--skeleton) .ant-badge-dot {
   position: absolute;
   top: 15px;
 }
