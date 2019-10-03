@@ -3,6 +3,7 @@ import StudentAvatar from "../avatar/StudentAvatar";
 import withDynamicDisplay from "../../animations/withDynamicDisplay";
 import Success from "../statistics/Success";
 import Completion from "../statistics/Completion";
+import Actions from './Actions';
 
 const SuccessWithDynamicDisplay = withDynamicDisplay(Success, "successRate");
 const CompletionWithDynamicDisplay = withDynamicDisplay(
@@ -14,7 +15,7 @@ const start = [
   {
     title: "",
     key: "avatar",
-    render: function AvatarCell(props) { return <StudentAvatar {...props} />; }
+    render: function AvatarCell({ isOnline, avatar }) { return <StudentAvatar isOnline={isOnline} avatar={avatar} shouldDisplayStatus={true} />; }
   },
   {
     title: "Réussite",
@@ -29,6 +30,16 @@ const start = [
   }
 ];
 
-const end = [];
+const end = [
+  {
+    title: "Actions",
+    key: "action",
+    width: 200,
+    dataIndex: "id",
+    render: function ActionsCell(id) {
+      return <Actions studentId={id} />
+    }
+  }
+];
 
 export { start, end };

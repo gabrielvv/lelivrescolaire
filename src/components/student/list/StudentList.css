@@ -26,6 +26,7 @@ td.column-session-status {
   background: #fafafa;
   box-shadow: none;
   display: flex;
+  padding: 0 16px;
 }
 
 .lls-student-list__header-title {
@@ -43,3 +44,13 @@ td.column-session-status {
 .lls-student-list__header-right-section button {
   /* right: 35px; */
 }
+
+/* @media screen and (max-width: 768px) { */
+  .ant-table-thead > tr > th:nth-of-type(6) {
+    display: none;
+  }
+
+  .ant-table-tbody > tr > td:nth-of-type(6) {
+    display: none;
+  }
+/* } */

@@ -6,30 +6,15 @@ import { withRouter } from 'react-router-dom'
 import "./StudentList.css";
 import { start, end } from "./FixedColumns";
 import StudentShape from "models/Student/propTypes";
-import { CreateForm, EditForm } from "../forms";
-import Actions from "./Actions";
+import { CreateForm } from "../forms";
 
 const StudentList = ({ studentList, studentListDisplaySettings }) => {
   const [isCreateFormVisible, setCreateFormVisibility] = useState(false);
-  const [editFormProps, setEditFormProps] = useState({ visible: false, studentId: undefined });
-  const setEditFormVisibility = (visible) => setEditFormProps({
-    ...editFormProps,
-    visible,
-  });
 
   const columns = [
     ...start,
     ...studentListDisplaySettings,
     ...end,
-    {
-      title: "Actions",
-      key: "action",
-      width: 200,
-      dataIndex: "id",
-      render: function ActionsCell(id) {
-        return <Actions studentId={id} onEdit={(studentId) => setEditFormProps({ studentId, visible: true })} />
-      }
-    }
   ];
 
   const TableWithClickableRow = withRouter(({ history }) => (
@@ -50,11 +35,6 @@ const StudentList = ({ studentList, studentListDisplaySettings }) => {
       <CreateForm
         isFormVisible={isCreateFormVisible}
         setFormVisibility={setCreateFormVisibility}
-      />
-      <EditForm
-        studentId={editFormProps.studentId}
-        isFormVisible={editFormProps.visible}
-        setFormVisibility={setEditFormVisibility}
       />
       <Layout className="lls-student-list__layout">
         <Layout.Header className="lls-student-list__header">

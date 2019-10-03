@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Divider, Button, Modal } from "antd";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { EditForm } from "../../forms"
 import PropTypes from "prop-types";
 
-const Actions = ({ studentId, onDeleteOk, onEdit }) => {
+const Actions = ({ studentId, onDeleteOk }) => {
+  const [isEditFormVisible, setEditFormVisibility] = useState(false);
   const showDeleteConfirm = () => {
     Modal.confirm({
       title: "Êtes vous sûr de vouloir supprimer cet élève?",
@@ -16,11 +18,16 @@ const Actions = ({ studentId, onDeleteOk, onEdit }) => {
   };
 
   return (
-    <span>
+    <span className="lls-student__actions" onClick={(event) => event.stopPropagation()}>
+       <EditForm
+        studentId={studentId}
+        isFormVisible={isEditFormVisible}
+        setFormVisibility={setEditFormVisibility}
+      />
       {/* <Link to={`/student/${studentId}`}> */}
         <Button type="primary" ghost icon="edit" onClick={(event) => {
           event.stopPropagation();
-          onEdit(studentId)
+          setEditFormVisibility(true)
         }}></Button>
       {/* </Link> */}
       <Divider type="vertical"/>
@@ -31,8 +38,7 @@ const Actions = ({ studentId, onDeleteOk, onEdit }) => {
 
 Actions.propTypes = {
   studentId: PropTypes.string.isRequired,
-  onDeleteOk: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onDeleteOk: PropTypes.func.isRequired
 }
 
 export default Actions;

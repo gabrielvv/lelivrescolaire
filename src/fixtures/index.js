@@ -22,7 +22,7 @@ const studentList = students.map(student => {
         avatar: {
             __typename: "Avatar",
             initials: `${student.lastname[0]}${student.firstname[0]}`.toUpperCase(),
-            imageSrc: "https://i.pravatar.cc/150?img=" + parseInt(Math.random() * 50)
+            imageSrc: `https://i.pravatar.cc/150?img=${student.id}`
         },
         isOnline: Math.random() > 0.5,
         successRate: reduceValueFromCollection("lessons", "successRate")({

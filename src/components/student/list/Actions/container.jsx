@@ -9,7 +9,7 @@ import Actions from "./Actions";
 
 const deleteStudentMutation = loader("graphql/deleteStudent.gql");
 
-const ActionsContainer = ({ studentId, onEdit }) => {
+const ActionsContainer = ({ studentId, onDeleteOk }) => {
   const [deleteStudent] = useMutation(deleteStudentMutation, {
     update(
       cache,
@@ -20,22 +20,21 @@ const ActionsContainer = ({ studentId, onEdit }) => {
       // DEV ONLY we rely on the graphql cache for fixtures
       afterDelete(studentId);
       if (deletedStudent.done) {
+        onDeleteOk && onDeleteOk();
         message.success("Elève supprimé");
       }
     }
   });
 
-  const onDeleteOk = () =>
+  return <Actions studentId={studentId} onDeleteOk={() =>
     deleteStudent({
       variables: { id: studentId }
-    });
-
-  return <Actions studentId={studentId} onDeleteOk={onDeleteOk} onEdit={onEdit} />;
+    })} />;
 };
 
 ActionsContainer.propTypes = {
   studentId: PropTypes.string.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onDeleteOk: PropTypes.func
 }
 
 export default ActionsContainer;
