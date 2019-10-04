@@ -10,18 +10,10 @@ import { getExerciseCountByStatus } from "models/Student/helpers";
 import Summary from "./Summary";
 import StudentShape from "models/Student/propTypes";
 import Actions from "../actions";
+import StudentName from './StudentName';
 
 const { Header } = Layout;
 const { TabPane } = Tabs;
-
-const StudentName = ({ cssClass, lastname, firstname, isOnline }) => {
-  return (
-    <div className={"lls-student__header-name " + cssClass}>
-        <span>{`${lastname} ${firstname}`}</span>
-        <span>{isOnline ? 'connecté' : 'déconnecté'}</span>
-    </div>
-  );
-};
 
 const AnimatedStudentName = withAnimation(
   StudentName,
@@ -34,7 +26,15 @@ const ActionsWithRedirectOnDelete = withRouter(({
 }) => <Actions studentId={props.studentId} onDeleteOk={() => history.push(`/`)}/>);
 
 const Student = ({ student, next: { id: nextId }, previous: { id: previousId } }) => {
-  const { id, isOnline, avatar, lastname, firstname } = student;
+  const { 
+    id, 
+    isOnline, 
+    avatar, 
+    lastname, 
+    firstname, 
+    activity,
+    skills
+  } = student;
   const exerciseCountByStatus = getExerciseCountByStatus(student);
   const lessonCountByStatus = {
     ready: 3,
@@ -74,13 +74,11 @@ const Student = ({ student, next: { id: nextId }, previous: { id: previousId } }
           <Summary
             exerciseCountByStatus={exerciseCountByStatus}
             lessonCountByStatus={lessonCountByStatus}
+            activity={activity}
+            skills={skills}
           />
         </TabPane>
         <TabPane disabled tab="Exercices" key="2">
-          <Summary
-            exerciseCountByStatus={exerciseCountByStatus}
-            lessonCountByStatus={lessonCountByStatus}
-          />
         </TabPane>
       </Tabs>
     </Layout>

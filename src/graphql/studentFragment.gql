@@ -8,6 +8,10 @@ fragment studentFragment on Student {
     successRate
     completion
     isOnline
+    activity {
+        x
+        y
+    }
     lessons {
         successRate
         completion
@@ -29,4 +33,5 @@ fragment studentFragment on Student {
             }
         }
     }
+    skills
 }

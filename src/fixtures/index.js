@@ -3,7 +3,6 @@ import {
     students,
     columns as studentListDisplaySettings
 } from './db.json';
-import activityChartData from './nivo.json';
 import {
     reduceValueFromCollection
 } from "utils";
@@ -14,6 +13,11 @@ const studentList = students.map(student => {
         successRate: reduceValueFromCollection("exercises", "successRate")(lesson),
         completion: reduceValueFromCollection("exercises", "completion")(lesson),
     }));
+
+    const activity = student.activity.map(obj => ({
+        ...obj,
+        __typename: 'Activty'
+    }))
 
     return {
         ...student,
@@ -30,7 +34,15 @@ const studentList = students.map(student => {
         }),
         completion: reduceValueFromCollection("lessons", "completion")({
             lessons
-        })
+        }),
+        skills: {
+            "Histoire": parseInt(Math.random() * 100),
+            "Mathématiques": parseInt(Math.random() * 100),
+            "Français": parseInt(Math.random() * 100),
+            "Géographie": parseInt(Math.random() * 100),
+            "Physique": parseInt(Math.random() * 100)
+        },
+        activity
     };
 })
 
@@ -63,7 +75,6 @@ const fixtureUpdate = (input) => {
 export {
     studentList,
     studentListDisplaySettings,
-    activityChartData,
     fixtureCreate,
     fixtureUpdate
 }
@@ -71,5 +82,4 @@ export {
 export default {
     studentList,
     studentListDisplaySettings,
-    activityChartData
 }

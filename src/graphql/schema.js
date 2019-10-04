@@ -1,11 +1,13 @@
 import {
   EmailAddressTypeDefinition as EmailAddressScalar,
-  DateTimeTypeDefinition as DateTimeScalar
+  DateTimeTypeDefinition as DateTimeScalar,
+  JSONObjectDefinition as JSONObject
 } from "graphql-scalars";
 
 export const typeDefs = `
   ${EmailAddressScalar}
   ${DateTimeScalar}
+  ${JSONObject}
 
   enum ExerciseStatusEnum {
     READY
@@ -80,6 +82,11 @@ export const typeDefs = `
     initials: String
   }
 
+  type Activity {
+    x: DateTime!
+    y: Float!
+  }
+
   type Student {
     id: ID!
     isOnline: Boolean
@@ -91,6 +98,8 @@ export const typeDefs = `
     completion: Int!
     successRate: Int!
     avatar: Avatar
+    activity: [Activity!]!
+    skills: JSONObject
   }
 
   type Column {

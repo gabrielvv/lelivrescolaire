@@ -1,6 +1,7 @@
 import {
   EmailAddressResolver as EmailAddress,
-  DateTimeResolver as DateTime
+  DateTimeResolver as DateTime,
+  JSONObjectResolver as JsonObject
 } from "graphql-scalars";
 
 import { fixtureCreate, fixtureUpdate } from '../fixtures'
@@ -9,6 +10,7 @@ import { getStudentListFromCache } from 'graphql/local-hack';
 export const resolvers = {
   EmailAddress,
   DateTime,
+  JsonObject,
   // DEV ONLY these resolvers are used to simulate an interaction with a real Graphql API
   Query: {
     next: (root, { id }) => {

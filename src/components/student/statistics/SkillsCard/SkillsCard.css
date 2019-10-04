@@ -1,11 +1,17 @@
-.lls-weak .ant-progress-bg {
+.lls-skill-weak .ant-progress-bg {
     background-color: rgb(207, 19, 34);
 }
 
-.lls-good .ant-progress-bg {
+.lls-skill-good .ant-progress-bg {
     background-color: #1890ff;
 }   
 
-.lls-excellent .ant-progress-bg {
+.lls-skill-excellent .ant-progress-bg {
     background-color: rgb(63, 134, 0);
+}
+
+.lls-skills-card .ant-card-body {
+    overflow: hidden;
+    height: 216px;
+    padding: 10px;
 }
