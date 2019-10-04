@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { loader } from "graphql.macro";
-import { useMutation, useQuery } from "@apollo/react-hooks";
 import { message } from "antd";
 import PropTypes from 'prop-types';
 
 import { afterUpdate } from 'graphql/local-hack'
 import EditForm from './EditForm';
+import { Query, Mutation } from '../../../../graphql';
 
 const updateStudentMutation = loader(
   "graphql/updateStudent.gql"
@@ -14,25 +14,23 @@ const getStudentQuery = loader("graphql/getStudent.gql");
 
 const EditFormContainer = ({ studentId, setFormVisibility, isFormVisible }) => {
   const [formRef, setFormRef] = useState();
-  const { loading, error, data } = useQuery(getStudentQuery, { variables: { id: studentId } });
-  const [updateStudent] = useMutation(updateStudentMutation, {
-    update(
-      cache,
-      {
-        data: { updateStudent: updatedStudentFragment }
-      }
-    ) {
-      // DEV ONLY we rely on the graphql cache for fixtures
-      afterUpdate(updatedStudentFragment)
-      if (updatedStudentFragment) {
-        message.success("Mise à jour réussie");
-      }
+
+  const updateFn = (
+    cache,
+    {
+      data: { updateStudent: updatedStudentFragment }
     }
-  });
+  ) => {
+    // DEV ONLY we rely on the graphql cache for fixtures
+    afterUpdate(updatedStudentFragment)
+    if (updatedStudentFragment) {
+      message.success("Mise à jour réussie");
+    }
+  }
 
   const onCancel = () => setFormVisibility(false);
 
-  const onOk = () => {
+  const onOk = (updateStudent) => () => {
     const { form } = formRef.props;
     form.validateFields((err, values) => {
       if (err) {
@@ -52,14 +50,27 @@ const EditFormContainer = ({ studentId, setFormVisibility, isFormVisible }) => {
     });
   }
 
-  return data && data.student
-    ? <EditForm
-      wrappedComponentRef={setFormRef}
-      onOk={onOk}
-      onCancel={onCancel}
-      student={data.student}
-      isFormVisible={isFormVisible} />
-    : null;
+  return (
+    <Query
+      query={getStudentQuery}
+      variables={{ id: studentId }}
+      render={({ data: { student } }) => (
+        <Mutation
+          name="updateStudent"
+          mutation={updateStudentMutation}
+          updateFn={updateFn}
+          render={({ updateStudent }) => (
+            <EditForm
+              wrappedComponentRef={setFormRef}
+              onOk={onOk(updateStudent)}
+              onCancel={onCancel}
+              student={student}
+              isFormVisible={isFormVisible} />
+          )}
+        />
+      )}
+    />
+  );
 }
 
 EditFormContainer.propTypes = {

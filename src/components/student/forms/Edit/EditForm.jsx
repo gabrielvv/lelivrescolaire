@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Form, Input, Row } from 'antd';
+import { Modal, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 
 import StudentShape from 'models/Student/propTypes';

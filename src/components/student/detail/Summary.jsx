@@ -5,7 +5,7 @@ import { SummaryCard, SkillsCard, ActivityCard } from "../statistics";
 
 const Summary = ({ lessonCountByStatus, exerciseCountByStatus }) => (
   <div className="lls-student__summary-section">
-    <Row gutter={16}>
+    <Row gutter={24}>
       <Col xs={24} sm={24} md={12} xl={12} className="lls-student__summary-sub-section">
         <SummaryCard title="Leçons" {...lessonCountByStatus} />
       </Col>
@@ -13,7 +13,7 @@ const Summary = ({ lessonCountByStatus, exerciseCountByStatus }) => (
         <SummaryCard title="Exercices" {...exerciseCountByStatus} />
       </Col>
     </Row>
-    <Row gutter={16}>
+    <Row gutter={24}>
       <Col xs={24} sm={24} md={12} xl={12} className="lls-student__summary-sub-section">
         <SkillsCard />
       </Col>

@@ -13,8 +13,9 @@ import logo from "logo.svg";
 import logoTitle from "logo-title.svg";
 import { StudentList, Student } from "components/student";
 import { NotFound, InternalError } from "../errors";
+import Mohe from 'components/animations/mohe/Mohe';
 
-const { Content, Sider } = Layout;
+const { Content, Sider, Footer } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(true);
@@ -57,9 +58,9 @@ const App = () => {
               <Route component={NotFound} />
             </Switch>
           </Content>
-          {/* <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
-        </Footer> */}
+          <Footer style={{ textAlign: "center" }}>
+            <Mohe />
+        </Footer>
         </Layout>
       </Layout>
     </Router>

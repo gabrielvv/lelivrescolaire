@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { loader } from "graphql.macro";
-import { useMutation } from "@apollo/react-hooks";
 import { message } from "antd";
 import PropTypes from 'prop-types';
 
 import { afterCreate } from 'graphql/local-hack';
 import CreateForm from './CreateForm';
+import { Mutation } from '../../../../graphql';
 
 const createStudentMutation = loader(
   "graphql/createStudent.gql"
@@ -13,24 +13,22 @@ const createStudentMutation = loader(
 
 const CreateFormContainer = ({ setFormVisibility, isFormVisible }) => {
   const [formRef, setFormRef] = useState();
-  const [createStudent] = useMutation(createStudentMutation, {
-    update(
-      cache,
-      {
-        data: { createStudent: createdStudent }
-      }
-    ) {
-      // DEV ONLY we rely on the graphql cache for fixtures
-      afterCreate(createdStudent);
-      if (createdStudent) {
-        message.success("Elève créé");
-      }
+  const updateFn = (
+    cache,
+    {
+      data: { createStudent: createdStudent }
     }
-  });
+  ) => {
+    // DEV ONLY we rely on the graphql cache for fixtures
+    afterCreate(createdStudent);
+    if (createdStudent) {
+      message.success("Elève créé");
+    }
+  };
 
   const onCancel = () => setFormVisibility(false);
 
-  const onCreate = () => {
+  const onCreate = (createStudent) => () => {
     const { form } = formRef.props;
     form.validateFields((err, values) => {
       if (err) {
@@ -49,11 +47,20 @@ const CreateFormContainer = ({ setFormVisibility, isFormVisible }) => {
     });
   }
 
-  return <CreateForm
-    wrappedComponentRef={setFormRef}
-    onCreate={onCreate}
-    onCancel={onCancel}
-    isFormVisible={isFormVisible} />
+  return (
+    <Mutation
+      name="createStudent"
+      mutation={createStudentMutation}
+      render={({ createStudent }) => (
+        <CreateForm
+          wrappedComponentRef={setFormRef}
+          onCreate={onCreate(createStudent)}
+          onCancel={onCancel}
+          isFormVisible={isFormVisible} />
+      )}
+      updateFn={updateFn}
+    />
+  );
 }
 
 CreateFormContainer.propTypes = {

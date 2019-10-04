@@ -3,7 +3,7 @@ import StudentAvatar from "../avatar/StudentAvatar";
 import withDynamicDisplay from "../../animations/withDynamicDisplay";
 import Success from "../statistics/Success";
 import Completion from "../statistics/Completion";
-import Actions from './Actions';
+import Actions from '../actions';
 
 const SuccessWithDynamicDisplay = withDynamicDisplay(Success, "successRate");
 const CompletionWithDynamicDisplay = withDynamicDisplay(

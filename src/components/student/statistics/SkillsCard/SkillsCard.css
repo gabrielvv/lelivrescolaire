@@ -1,0 +1,11 @@
+.lls-weak .ant-progress-bg {
+    background-color: rgb(207, 19, 34);
+}
+
+.lls-good .ant-progress-bg {
+    background-color: #1890ff;
+}   
+
+.lls-excellent .ant-progress-bg {
+    background-color: rgb(63, 134, 0);
+}

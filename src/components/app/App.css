@@ -3,6 +3,10 @@
   padding-left: 18px;
 }
 
+.ant-layout-footer {
+  padding-top: 0;
+}
+
 .app-logo-container--collapsed .app-logo {
   padding-left: 24px;
 }

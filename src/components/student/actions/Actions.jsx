@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Divider, Button, Modal } from "antd";
 // import { Link } from "react-router-dom";
-import { EditForm } from "../../forms"
+import { EditForm } from "../forms"
 import PropTypes from "prop-types";
 
 const Actions = ({ studentId, onDeleteOk }) => {

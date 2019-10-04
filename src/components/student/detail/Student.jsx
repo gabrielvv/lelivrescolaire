@@ -9,7 +9,7 @@ import withAnimation from "../../animations/withAnimation";
 import { getExerciseCountByStatus } from "models/Student/helpers";
 import Summary from "./Summary";
 import StudentShape from "models/Student/propTypes";
-import Actions from "../list/Actions";
+import Actions from "../actions";
 
 const { Header } = Layout;
 const { TabPane } = Tabs;
@@ -18,7 +18,7 @@ const StudentName = ({ cssClass, lastname, firstname, isOnline }) => {
   return (
     <div className={"lls-student__header-name " + cssClass}>
         <span>{`${lastname} ${firstname}`}</span>
-        <span>{isOnline ? 'online' : 'offline'}</span>
+        <span>{isOnline ? 'connecté' : 'déconnecté'}</span>
     </div>
   );
 };
@@ -33,7 +33,7 @@ const ActionsWithRedirectOnDelete = withRouter(({
   history, ...props 
 }) => <Actions studentId={props.studentId} onDeleteOk={() => history.push(`/`)}/>);
 
-const Student = ({ student, previousId, nextId }) => {
+const Student = ({ student, next: { id: nextId }, previous: { id: previousId } }) => {
   const { id, isOnline, avatar, lastname, firstname } = student;
   const exerciseCountByStatus = getExerciseCountByStatus(student);
   const lessonCountByStatus = {
@@ -70,13 +70,13 @@ const Student = ({ student, previousId, nextId }) => {
         </div>
       </Header>
       <Tabs defaultActiveKey="1">
-        <TabPane tab="Résumé" key="1" style={{ background: "#ECECEC" }}>
+        <TabPane tab="Résumé" key="1">
           <Summary
             exerciseCountByStatus={exerciseCountByStatus}
             lessonCountByStatus={lessonCountByStatus}
           />
         </TabPane>
-        <TabPane tab="Exercices" key="2" style={{ background: "#ECECEC" }}>
+        <TabPane disabled tab="Exercices" key="2">
           <Summary
             exerciseCountByStatus={exerciseCountByStatus}
             lessonCountByStatus={lessonCountByStatus}
@@ -89,8 +89,8 @@ const Student = ({ student, previousId, nextId }) => {
 
 Student.propTypes = {
   student: StudentShape,
-  previousId: PropTypes.string,
-  nextId: PropTypes.string
+  previous: PropTypes.object.isRequired,
+  next: PropTypes.object.isRequired
 };
 
 export default Student;

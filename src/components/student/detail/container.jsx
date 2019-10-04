@@ -1,33 +1,24 @@
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import Student from "./Student";
-import withLoadingErrorData from '../../hoc/withLoadingErrorData';
+import { Query } from '../../../graphql';
 
 const getStudent = loader("graphql/getStudent.gql");
 
-const StudentWithDataFetching = withLoadingErrorData(Student)
-
 const StudentContainer = ({ match }) => {
-  const { loading, error, data } = useQuery(getStudent, {
-    variables: { id: match.params.studentId }
-  });
+  const variables = { id: match.params.studentId };
 
-  const props = {
-    extractPropsFromData: (data) => ({
-      student: data.student,
-      previousId: data.previous.id,
-      nextId: data.next.id,
-    }),
-    nilCheck: (data) => !data.student,
-    loading,
-    error,
-    data,
-  };
-
-  return <StudentWithDataFetching {...props} />;
+  return (
+    <Query
+      query={getStudent}
+      variables={variables}
+      render={({ data }) => (
+        <Student {...data} />
+      )}
+    />
+  );
 };
 
 StudentContainer.propTypes = {

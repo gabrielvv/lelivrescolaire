@@ -1,6 +1,8 @@
 import React from "react";
 import { Row, Col, Card, Statistic } from "antd";
-import withDynamicDisplay from "../../animations/withDynamicDisplay";
+import withDynamicDisplay from "../../../animations/withDynamicDisplay";
+
+import './SummaryCard.css';
 
 const StatisticWithDynamicDisplay = withDynamicDisplay(
   Statistic,
@@ -11,22 +13,22 @@ const StatisticWithDynamicDisplay = withDynamicDisplay(
 
 const SummaryCard = ({ ready, inProgress, finished, title }) => (
   <Card title={title}>
-    <Row gutter={15}>
-      <Col span={5}>
+    <Row>
+      <Col span={8}>
         <StatisticWithDynamicDisplay
           title="En attente"
           valueStyle={{ color: "#cf1322" }}
           value={ready}
         ></StatisticWithDynamicDisplay>
       </Col>
-      <Col span={5}>
+      <Col span={8}>
         <StatisticWithDynamicDisplay
           title="En cours"
           valueStyle={{ color: "orange" }}
           value={inProgress}
         ></StatisticWithDynamicDisplay>
       </Col>
-      <Col span={5}>
+      <Col span={8}>
         <StatisticWithDynamicDisplay
           title="Terminés"
           valueStyle={{ color: "#3f8600" }}

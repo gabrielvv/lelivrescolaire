@@ -41,6 +41,7 @@ const afterCreate = (createdStudent) => {
         studentList,
         studentListDisplaySettings
     } = getStudentListFromCache();
+
     writeStudentListToCache([...studentList, createdStudent], studentListDisplaySettings);
 }
 
