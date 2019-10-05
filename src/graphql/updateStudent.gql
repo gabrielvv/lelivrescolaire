@@ -1,7 +1,0 @@
-mutation UpdateStudent($input: UpdateStudentInput) {
-    updateStudent(input: $input) @client {
-        lastname
-        firstname
-        id
-    }
-}

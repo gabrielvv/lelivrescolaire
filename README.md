@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Exo 1: Architecture
 
-## Available Scripts
+## Diagramme d'entités
 
-In the project directory, you can run:
+![ERD](./erd.png)
 
-### `npm start`
+## Choix techniques
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Je propose une architecture de type microservices déployée sur le cloud (chez AWS par exemple) comprenant:
+- une application web de type SPA s'exécutant dans un navigateur
+- une API Gateway en GraphQL recevant les requêtes de l'application et appelant les services adaptées en JSON-RPC
+- Du cache distribuée pour la gestion des sessions
+- Des services (authentification-service, session-service, notification-service, exercice-service...)
+    - répondant aux requêtes de l'API Gateway
+    - émettant des messages
+    - réagissant à des messages
+- Des workers
+    - réagissent aux messages
+    - exécutent le code fourni par les candidats et publient le résultat
+    - exécutent l'algorithme en C de création des exercices techniques
+- Des [language server](https://langserver.org/) chargés de fournir les fonctionnalités d'un IDE (autocomplétion, correction syntaxique, ...) pour chaque langage supporté, et communiquant avec la partie IDE de l'application grâce au [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) en JSON-RPC
+- Une base de données relationnelle pour stocker les données des services
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Infrastructure
 
-### `npm test`
+Pour répondre à la forte charge du lancement unique, je propose une architecture 
+_scalable_:
+- plusieurs instances d'un même service, worker, de l'API Gateway et des language servers dont le nombre sera adapté après des tests de charge
+- répartition de charge pour l'API Gateway, les language servers, les services
+- on privilégie les traitements asynchrone via l'utilisation d'une file de message et de workers
+- de la mise à l'échelle automatique pour s'adapter dynamiquement à des fluctuations de charge et réduire le nombre d'instances une fois le pic de charge du lancement passé
+- du monitoring avec une stack de type ELK (logging + technologie de recherche à travers les logs + une technologie de visualisation et d'alerte)
+- containerisation pour accélérer le déploiement de nouvelles instances et la suppression des instances défectueuses
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Choix Technique | Technologie | Alternative |
+--------------- | ------------| ------------|
+Répartition de charge | Elastic Load Balancing (AWS) | Nginx |
+Auto-scaling+Container | Elastic Container Service (AWS)| Kubernetes + Docker |
+File de messages | Simple Queue Service | RabbitMQ |
+Monitoring | ElasticSearch/Logstash/Kibana | Prometheus+Grafana |
+Base de données | Amazon Aurora | PostgresSQL |
+Content Delivery Network | Cloudfront | Cloudflare |
+Ressources Statiques | Simple Storage Service (AWS S3) | Serveur dédié + NGINX |
+Cache | Memcached | Redis | 
 
-### `npm run build`
+### Frontend
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Choix Technique | Technologie | Alternative |
+--------------- | ------------| ------------|
+Framework | Elastic Load Balancing (AWS) | Nginx |
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Choix Technique | Technologie | Alternative |
+--------------- | ------------| ------------|
+Framework | Elastic Load Balancing (AWS) | Nginx |
 
-### `npm run eject`
+## Diagramme d'architecture
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Architecture](./lls-architecture.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Conception de l'algorithme en C
