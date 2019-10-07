@@ -83,7 +83,11 @@ Cache                                         | Memcached     | Redis |
 
 ### Diagramme de séquence - correction exercice
 
+![Diagramme de séquence](./seq-diagram-correction.png)
+
 ### Diagramme de séquence - génération des exercices
+
+![Diagramme de séquence](./seq-diagram-creation.png)
 
 ## Conception de l'algorithme en C
 
