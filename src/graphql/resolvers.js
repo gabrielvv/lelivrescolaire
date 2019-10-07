@@ -4,8 +4,8 @@ import {
   JSONObjectResolver as JsonObject
 } from "graphql-scalars";
 
-import { fixtureCreate, fixtureUpdate } from '../fixtures'
-import { getStudentListFromCache } from 'graphql/local-hack';
+import { fixtureCreate, fixtureUpdate } from "../fixtures";
+import { getStudentListFromCache } from "graphql/local-state";
 
 export const resolvers = {
   EmailAddress,
@@ -20,7 +20,7 @@ export const resolvers = {
       );
       const nextIndex = studentIndex + 1;
       if (nextIndex < studentList.length) {
-        return studentList[nextIndex]
+        return studentList[nextIndex];
       }
       return studentList[0];
     },
@@ -31,11 +31,14 @@ export const resolvers = {
       );
       const previousIndex = studentIndex - 1;
       if (previousIndex >= 0) {
-        return studentList[previousIndex]
+        return studentList[previousIndex];
       }
       return studentList[studentList.length - 1];
     },
-    student: (root, { id }) => getStudentListFromCache().studentList.find(({ id: studentId }) => studentId === id) || null,
+    student: (root, { id }) =>
+      getStudentListFromCache().studentList.find(
+        ({ id: studentId }) => studentId === id
+      ) || null
   },
   Mutation: {
     // eslint-disable-next-line no-unused-vars
@@ -44,6 +47,6 @@ export const resolvers = {
       done: true
     }),
     createStudent: (root, { input }) => fixtureCreate(input),
-    updateStudent: (root, { input }) => fixtureUpdate(input),
+    updateStudent: (root, { input }) => fixtureUpdate(input)
   }
 };

@@ -1,18 +1,15 @@
 import { InMemoryCache } from "apollo-boost";
-import { loader } from "graphql.macro";
 import fixtures from "../fixtures";
-import lodashPick from 'lodash/pick';
+import lodashPick from "lodash/pick";
 
-const getStudentListQuery = loader(
-  "graphql/getStudentListWithDisplaySettings.gql"
-);
+import { GET_STUDENT_LIST_WITH_DISPLAY_SETTINGS } from "./queries";
 
 const cache = new InMemoryCache();
 
 cache.writeQuery({
-  query: getStudentListQuery,
+  query: GET_STUDENT_LIST_WITH_DISPLAY_SETTINGS,
   variables: { classId: "1" },
-  data: lodashPick(fixtures, ['studentList', 'studentListDisplaySettings']),
+  data: lodashPick(fixtures, ["studentList", "studentListDisplaySettings"])
 });
 
 export default cache;

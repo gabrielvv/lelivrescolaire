@@ -1,4 +1,4 @@
-#import "./studentFragment.gql"
+#import "../fragments/studentFragment.gql"
 
 query getStudent($id: ID!) {
     student(id: $id) @client {

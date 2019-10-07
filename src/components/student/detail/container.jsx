@@ -1,28 +1,23 @@
 import React from "react";
-import { loader } from "graphql.macro";
-import ReactRouterPropTypes from 'react-router-prop-types';
+import ReactRouterPropTypes from "react-router-prop-types";
 
 import Student from "./Student";
-import { Query } from '../../../graphql';
-
-const getStudent = loader("graphql/getStudent.gql");
+import { Query, GET_STUDENT } from "../../../graphql";
 
 const StudentContainer = ({ match }) => {
   const variables = { id: match.params.studentId };
 
   return (
     <Query
-      query={getStudent}
+      query={GET_STUDENT}
       variables={variables}
-      render={({ data }) => (
-        <Student {...data} />
-      )}
+      render={({ data }) => <Student {...data} />}
     />
   );
 };
 
 StudentContainer.propTypes = {
   match: ReactRouterPropTypes.match.isRequired
-}
+};
 
 export default StudentContainer;

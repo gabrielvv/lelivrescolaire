@@ -1,7 +1,7 @@
-import Query from './Query';
-import Mutation from './Mutation';
+import Query from "./components/Query";
+import Mutation from "./components/Mutation";
 
-export {
-    Query,
-    Mutation,
-}
+export { Query, Mutation };
+
+export * from "./queries";
+export * from "./mutations";

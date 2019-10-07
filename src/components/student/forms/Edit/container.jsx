@@ -1,36 +1,33 @@
-import React, { useState } from 'react'
-import { loader } from "graphql.macro";
+import React, { useState } from "react";
 import { message } from "antd";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { afterUpdate } from 'graphql/local-hack'
-import EditForm from './EditForm';
-import { Query, Mutation } from '../../../../graphql';
-
-const updateStudentMutation = loader(
-  "graphql/updateStudent.gql"
-);
-const getStudentQuery = loader("graphql/getStudent.gql");
+import { afterUpdate } from "graphql/local-state";
+import EditForm from "./EditForm";
+import {
+  Query,
+  Mutation,
+  GET_STUDENT,
+  UPDATE_STUDENT
+} from "../../../../graphql";
 
 const EditFormContainer = ({ studentId, setFormVisibility, isFormVisible }) => {
   const [formRef, setFormRef] = useState();
 
   const updateFn = (
     cache,
-    {
-      data: { updateStudent: updatedStudentFragment }
-    }
+    { data: { updateStudent: updatedStudentFragment } }
   ) => {
     // DEV ONLY we rely on the graphql cache for fixtures
-    afterUpdate(updatedStudentFragment)
+    afterUpdate(updatedStudentFragment);
     if (updatedStudentFragment) {
       message.success("Mise à jour réussie");
     }
-  }
+  };
 
   const onCancel = () => setFormVisibility(false);
 
-  const onOk = (updateStudent) => () => {
+  const onOk = updateStudent => () => {
     const { form } = formRef.props;
     form.validateFields((err, values) => {
       if (err) {
@@ -48,16 +45,16 @@ const EditFormContainer = ({ studentId, setFormVisibility, isFormVisible }) => {
       form.resetFields();
       setFormVisibility(false);
     });
-  }
+  };
 
   return (
     <Query
-      query={getStudentQuery}
+      query={GET_STUDENT}
       variables={{ id: studentId }}
       render={({ data: { student } }) => (
         <Mutation
           name="updateStudent"
-          mutation={updateStudentMutation}
+          mutation={UPDATE_STUDENT}
           updateFn={updateFn}
           render={({ updateStudent }) => (
             <EditForm
@@ -65,18 +62,19 @@ const EditFormContainer = ({ studentId, setFormVisibility, isFormVisible }) => {
               onOk={onOk(updateStudent)}
               onCancel={onCancel}
               student={student}
-              isFormVisible={isFormVisible} />
+              isFormVisible={isFormVisible}
+            />
           )}
         />
       )}
     />
   );
-}
+};
 
 EditFormContainer.propTypes = {
   studentId: PropTypes.string,
   setFormVisibility: PropTypes.func.isRequired,
   isFormVisible: PropTypes.bool.isRequired
-}
+};
 
 export default EditFormContainer;
